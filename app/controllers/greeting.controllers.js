@@ -100,3 +100,27 @@ exports.update = (req, res) => {
             });
         });
 };
+
+/**
+ * @description Delete a greeting message with the specified messageId in the request
+ */
+exports.delete = (req, res) => {
+    Greeting.findByIdAndRemove(req.params.messageId)
+        .then(greetingMessage => {
+            if (!greetingMessage) {
+                return res.status(404).send({
+                    message: `greeting message not found with id ${req.params.messageId}`
+                });
+            }
+            res.send({ message: "message deleted successfully!" });
+        }).catch(err => {
+            if (err.kind === 'ObjectId' || err.name === 'NotFound') {
+                return res.status(404).send({
+                    message: `greeting message not found with id ${req.params.messageId}`
+                });
+            }
+            return res.status(500).send({
+                message: `Error retrieving greeting message with id ${req.params.messageId}`
+            });
+        });
+};

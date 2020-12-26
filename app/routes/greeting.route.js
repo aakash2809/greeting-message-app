@@ -10,7 +10,7 @@ module.exports = (app) => {
     /**
     * @description Retrieve all greeting messages
     */
-   app.get('/greetingMessage', greetingMessage.findAll);
+    app.get('/greetingMessage', greetingMessage.findAll);
 
     /**
      * @description Retrieve a single greeting messages with messageId
@@ -21,4 +21,9 @@ module.exports = (app) => {
      * @description Update a greeting messages with messageId
      */
     app.put('/greetingMessage/:messageId', greetingMessage.update);
+
+    /**
+    * @description Delete a greeting messages with messageId
+    */
+   app.delete('/greetingMessage/:messageId', greetingMessage.delete);
 }
