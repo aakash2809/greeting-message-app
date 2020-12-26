@@ -2,6 +2,7 @@ const express = require(`express`);
 const bodyParser = require('body-parser');
 const dbConfig = require('./config/database.config.js');
 const mongoose = require('mongoose');
+const route = require(`./app/routes/greeting.route.js`);
 
 /**
  * @description create express app
@@ -38,6 +39,8 @@ mongoose.connect(dbConfig.url, {
 app.get('/', (req, res) => {
     res.json({ "message": "Welcome to Greeting message application." });
 });
+
+route(app);
 
 
 /**
