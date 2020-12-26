@@ -13,7 +13,12 @@ module.exports = (app) => {
    app.get('/greetingMessage', greetingMessage.findAll);
 
     /**
-     * @description Retrieve a single Note with noteId
+     * @description Retrieve a single greeting messages with messageId
      */
     app.get('/greetingMessage/:messageId', greetingMessage.findOne);
+
+    /**
+     * @description Update a greeting messages with messageId
+     */
+    app.put('/greetingMessage/:messageId', greetingMessage.update);
 }

@@ -7,7 +7,7 @@ exports.create = (req, res) => {
     //Validate request
     if (!req.body.message) {
         return res.status(400).send({
-            message: ` greeting message can not be empty`
+            message: `greeting message can not be empty`
         });
     }
 
@@ -46,6 +46,42 @@ exports.findAll = (req, res) => {
  */
 exports.findOne = (req, res) => {
     Greeting.findById(req.params.messageId)
+        .then(greetingMessage => {
+            if (!greetingMessage) {
+                return res.status(404).send({
+                    message: `greeting message not found with id ${req.params.messageId}`
+                });
+            }
+            res.send(greetingMessage);
+        }).catch(err => {
+            if (err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: `greeting message not found with id ${req.params.messageId}`
+                });
+            }
+            return res.status(500).send({
+                message: `Error retrieving greeting message with id ${req.params.messageId}`
+            });
+        });
+};
+
+/**
+ * @description Update greeting message identified by the messageId in the request
+ */
+exports.update = (req, res) => {
+    // Validate request     
+    if (!req.body.message) {
+        return res.status(400).send({
+            message: `greeting message can not be empty`
+        });
+    }
+
+    /**
+     * @description Find greeting message and update it with the request body
+     */
+    Greeting.findByIdAndUpdate(req.params.messageId, {
+        message: req.body.message
+    }, { new: true })
         .then(greetingMessage => {
             if (!greetingMessage) {
                 return res.status(404).send({
