@@ -1,3 +1,19 @@
-module.exports = {
-    url: 'mongodb://localhost:27017/greeting-message'
+const mongoose = require('mongoose');
+require(`dotenv`).config();
+
+module.exports = () => {
+    mongoose.Promise = global.Promise;
+    
+    /**
+     * @description Connecting to the database
+     */
+    mongoose.connect(process.env.MONGODB_URL, {
+        useNewUrlParser: true
+    }).then(() => {
+        console.log(`Successfully connected to the database`);
+    }).catch(err => {
+        console.log('Could not connect to the database. Exiting now...', err);
+        process.exit();
+    });
 }
+
