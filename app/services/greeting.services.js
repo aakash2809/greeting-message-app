@@ -1,7 +1,6 @@
 const Greeting = require('../models/greetingMethods.js');
 
 exports.saveData = (data, callback) => {
-    //console.log(data);
     Greeting.createMessage(data, (err, result) => {
         if (err) {
             callback(err, null)
@@ -11,5 +10,22 @@ exports.saveData = (data, callback) => {
     })
 }
 
+exports.retrieveData = (callback) => {
+    Greeting.getAllMessages((err, result) => {
+        if (err) {
+            callback(err, null)
+        } else {
+            callback(null, result);
+        }
+    })
+}
 
-
+exports.retrieveDataById = (data ,callback) => {
+    Greeting.getDataById(data, (err, result) => {
+        if (err) {
+            callback(err, null)
+        } else {
+            callback(null, result);
+        }
+    })
+}

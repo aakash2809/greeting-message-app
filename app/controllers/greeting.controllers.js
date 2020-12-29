@@ -17,44 +17,37 @@ exports.create = (req, res) => {
 
 };
 
-
 /**
  * @description Retrieve and return all greeting message from the database.
  */
 exports.findAll = (req, res) => {
-    Greeting.find()
-        .then(greetingMessage => {
-            res.send(greetingMessage);
-        }).catch(err => {
+    servises.retrieveData( (err, result) => {
+        if (err) {
             res.status(500).send({
                 message: err.message || `Some error occurred while retrieving greeting message.`
             });
-        });
+        } else {
+            res.status(200).send(result)
+        }
+    })
 };
 
 /**
  * @description Find a single message with a messageId.
  */
 exports.findOne = (req, res) => {
-    Greeting.findById(req.params.messageId)
-        .then(greetingMessage => {
-            if (!greetingMessage) {
-                return res.status(404).send({
-                    message: `greeting message not found with id ${req.params.messageId}`
-                });
-            }
-            res.send(greetingMessage);
-        }).catch(err => {
-            if (err.kind === 'ObjectId') {
-                return res.status(404).send({
-                    message: `greeting message not found with id ${req.params.messageId}`
-                });
-            }
-            return res.status(500).send({
-                message: `Error retrieving greeting message with id ${req.params.messageId}`
+    servises.retrieveDataById( req.params.messageId, (err, result) => {
+        if (err) {
+            res.status(404).send({
+                message: `greeting message not found with id ${req.params.messageId}`
             });
-        });
+        } else {
+            res.send(result);
+        }
+    })
+   
 };
+
 
 /**
  * @description Update greeting message identified by the messageId in the request

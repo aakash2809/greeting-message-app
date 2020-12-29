@@ -2,18 +2,36 @@ const Greeting = require('./greeting.js');
 
 class ApiMethods {
     createMessage(data, callback) {
-        console.log(data);
-        const greetingMessage = new Greeting({message: data});
+        const greetingMessage = new Greeting({ message: data });
         greetingMessage.save((err, data) => {
             if (err) {
-                console.log(err);
                 callback(err, null);
             } else {
-                console.log(data);
                 callback(null, data);
             }
         });
     }
+
+    getAllMessages(callback) {
+        Greeting.find((err, data) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, data);
+            }
+        });
+    }
+
+    getDataById(data,callback) {
+        Greeting.findById(data ,(err, result) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, result);
+            }
+        });
+    }
+
 }
 
 module.exports = new ApiMethods;
