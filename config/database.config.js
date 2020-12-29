@@ -2,11 +2,7 @@ const mongoose = require('mongoose');
 require(`dotenv`).config();
 
 module.exports = () => {
-    mongoose.Promise = global.Promise;
-    
-    /**
-     * @description Connecting to the database
-     */
+    //Connecting to the database
     mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true
     }).then(() => {

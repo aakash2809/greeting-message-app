@@ -25,5 +25,5 @@ module.exports = (app) => {
     /**
     * @description Delete a greeting messages with messageId
     */
-   app.delete('/greetingMessage/:messageId', greetingMessage.delete);
+    app.delete('/greetingMessage/:messageId', greetingMessage.delete);
 }

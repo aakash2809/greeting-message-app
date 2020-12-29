@@ -1,30 +1,25 @@
+const { restart } = require('nodemon');
 const Greeting = require('../models/greeting.js');
-
+const servises = require(`../services/greeting.services.js`)
+const A = require('../models/greetingMethods.js');
 /**
  * @description Create and Save message
  */
 exports.create = (req, res) => {
-    //Validate request
-    if (!req.body.message) {
-        return res.status(400).send({
-            message: `greeting message can not be empty`
-        });
-    }
+/*   const requestResult = servises.saveAndReturnResponse(req);
+  console.log(requestResult);
+    res.send(requestResult); */
+   /*  try{
+    const greetingMessage = new Greeting({message: req.body.message });
+    await greetingMessage.save();
+    res.send(greetingMessage);
+    }catch(err){
+        res.send('data not saved')
+    } */
+    const b = A.createMessage(req,res);
+    console.log(b.res);
+    res.send(b.res);
 
-    //Create a greeting message
-    const greetingMessage = new Greeting({
-        message: req.body.message
-    });
-
-    //Save greeting message in the database
-    greetingMessage.save()
-        .then(data => {
-            res.send(data);
-        }).catch(err => {
-            res.status(500).send({
-                message: err.message || `Some error occurred while creating the message.`
-            });
-        });
 };
 
 /**
