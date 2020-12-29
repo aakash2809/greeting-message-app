@@ -1,12 +1,11 @@
 const Greeting = require('../models/greeting.js');
 const servises = require(`../services/greeting.services.js`)
-const A = require('../models/greetingMethods.js')
 
 /**
  * @description Create and Save message
  */
 exports.create = (req, res) => {
-    servises.saveData(req.body, (err, result) => {
+    servises.saveData(req.body.message, (err, result) => {
         if (err) {
             res.status(400).send({
                 message: `greeting message can not be empty`
@@ -17,6 +16,7 @@ exports.create = (req, res) => {
     })
 
 };
+
 
 /**
  * @description Retrieve and return all greeting message from the database.
