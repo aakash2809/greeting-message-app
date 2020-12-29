@@ -1,24 +1,19 @@
-const { restart } = require('nodemon');
 const Greeting = require('../models/greeting.js');
 const servises = require(`../services/greeting.services.js`)
-const A = require('../models/greetingMethods.js');
+const A = require('../models/greetingMethods.js')
+
 /**
  * @description Create and Save message
  */
 exports.create = (req, res) => {
-/*   const requestResult = servises.saveAndReturnResponse(req);
-  console.log(requestResult);
-    res.send(requestResult); */
-   /*  try{
-    const greetingMessage = new Greeting({message: req.body.message });
-    await greetingMessage.save();
-    res.send(greetingMessage);
-    }catch(err){
-        res.send('data not saved')
-    } */
-    const b = A.createMessage(req,res);
-    console.log(b.res);
-    res.send(b.res);
+    servises.saveData(req.body, (err, result) => {
+        if (err) {
+            res.status(400).send({
+                message: `greeting message can not be empty`});
+        } else {
+            res.status(200).send(result)
+        }
+    })
 
 };
 
