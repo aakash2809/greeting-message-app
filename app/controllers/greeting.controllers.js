@@ -9,7 +9,8 @@ exports.create = (req, res) => {
     servises.saveData(req.body, (err, result) => {
         if (err) {
             res.status(400).send({
-                message: `greeting message can not be empty`});
+                message: `greeting message can not be empty`
+            });
         } else {
             res.status(200).send(result)
         }

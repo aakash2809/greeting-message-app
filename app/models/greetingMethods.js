@@ -1,10 +1,12 @@
-const greetingMessage = require('./greeting.js');
+const Greeting = require('./greeting.js');
 
 class ApiMethods {
     createMessage(data, callback) {
-        greetingMessage.save({ message: data.message }, (err, data) => {
+        console.log(data);
+        const greetingMessage = new Greeting({message: data });
+        greetingMessage.save({}, (err, data) => {
             if (err) {
-                callback(err);
+                callback(err, null);
             } else {
                 callback(null, data);
             }
