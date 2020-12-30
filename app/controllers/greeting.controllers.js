@@ -1,8 +1,6 @@
 const servises = require(`../services/greeting.services.js`)
 
-/**
- * @description Create and Save message
- */
+//Create and Save message
 exports.create = (req, res) => {
     servises.saveData(req.body.message, (err, result) => {
         if (err) {
@@ -16,9 +14,7 @@ exports.create = (req, res) => {
 
 };
 
-/**
- * @description Retrieve and return all greeting message from the database.
- */
+//Retrieve and return all greeting message from the database.
 exports.findAll = (req, res) => {
     servises.retrieveData((err, result) => {
         if (err) {
@@ -31,12 +27,10 @@ exports.findAll = (req, res) => {
     })
 };
 
-/**
- * @description Find a single message with a messageId.
- */
+//Find a single message with a messageId.
 exports.findOne = (req, res) => {
     servises.retrieveDataById(req.params.messageId, (err, result) => {
-        if (err) {
+        if (result === null) {
             res.status(404).send({
                 message: `greeting message not found with id ${req.params.messageId}`
             });
@@ -60,18 +54,15 @@ exports.update = (req, res) => {
         });
 };
 
-
-/**
- * @description Delete a greeting message with the specified messageId in the request
- */
+//Delete a greeting message with the specified messageId in the request
 exports.delete = (req, res) => {
-    servises.removeDataById(req.params.messageId, (err) => {
-        if (err) {
+    servises.removeDataById(req.params.messageId, (err,result) => {
+        if (result === null) {
             res.status(404).send({
                 message: `greeting message not found with id ${req.params.messageId}`
             });
         } else {
-            res.send({ message: "message deleted successfully!" });
+            res.send({ message: 'message deleted successfully! ' });
         }
     })
 };

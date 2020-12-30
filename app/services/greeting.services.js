@@ -13,7 +13,7 @@ exports.saveData = (data, callback) => {
 exports.retrieveData = (callback) => {
     Greeting.getAllMessages((err, result) => {
         if (err) {
-            callback(err, null)
+            callback(err, null);
         } else {
             callback(null, result);
         }
@@ -31,21 +31,21 @@ exports.retrieveDataById = (data ,callback) => {
 }
 
 exports.removeDataById = (data ,callback) => {
-    Greeting.deleteDataById(data, (err) => {
+    Greeting.deleteDataById(data, (err,result) => {
         if (err) {
-            callback(err)
+            callback(err, null)
         } else {
-            callback(null);
+            callback(null, result)
         }
     })
 }
 
 exports.updateDataById = (MessageId, dataToReplace ,callback) => {
-    Greeting.updateData(MessageId, dataToReplace , (err, result) => {
+    Greeting.updateData(MessageId, dataToReplace , (err) => {
         if (err) {
-            callback(err, null)
+            callback(err)
         } else {
-            callback(null, result);
+            callback(null);
         }
     })
 }
