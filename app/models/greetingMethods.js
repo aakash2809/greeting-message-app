@@ -22,8 +22,8 @@ class ApiMethods {
         });
     }
 
-    getDataById(data,callback) {
-        Greeting.findById(data ,(err, result) => {
+    getDataById(data, callback) {
+        Greeting.findById(data, (err, result) => {
             if (err) {
                 callback(err, null);
             } else {
@@ -32,6 +32,25 @@ class ApiMethods {
         });
     }
 
+    deleteDataById(data, callback) {
+        Greeting.find(data, (err) => {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null);
+            }
+        });
+    }
+
+    updateData(MessageId, dataToUpdate, callback) {
+        Greeting.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (err, result) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                callback(null, result);;
+            }
+        });
+    }
 }
 
 module.exports = new ApiMethods;

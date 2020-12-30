@@ -29,3 +29,23 @@ exports.retrieveDataById = (data ,callback) => {
         }
     })
 }
+
+exports.removeDataById = (data ,callback) => {
+    Greeting.deleteDataById(data, (err) => {
+        if (err) {
+            callback(err)
+        } else {
+            callback(null);
+        }
+    })
+}
+
+exports.updateDataById = (MessageId, dataToReplace ,callback) => {
+    Greeting.updateData(MessageId, dataToReplace , (err, result) => {
+        if (err) {
+            callback(err, null)
+        } else {
+            callback(null, result);
+        }
+    })
+}
