@@ -1,4 +1,12 @@
-const Greeting = require('./greeting.js');
+const mongoose = require(`mongoose`);
+const MessageSchema = new mongoose.Schema({
+    message: {
+        type: String,
+        required: true
+    },
+})
+
+const Greeting =  mongoose.model(`greetingMessage`, MessageSchema)
 
 class ApiMethods {
     createMessage = (data, callback) => {
