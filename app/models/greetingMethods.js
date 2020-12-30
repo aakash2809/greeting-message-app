@@ -6,7 +6,7 @@ const MessageSchema = new mongoose.Schema({
     },
 })
 
-const Greeting =  mongoose.model(`greetingMessage`, MessageSchema)
+const Greeting = mongoose.model(`greetingMessage`, MessageSchema)
 
 class ApiMethods {
     createMessage = (data, callback) => {
@@ -41,7 +41,7 @@ class ApiMethods {
     }
 
     deleteDataById(data, callback) {
-        Greeting.findByIdAndDelete(data, (err,result) => {
+        Greeting.findByIdAndDelete(data, (err, result) => {
             if (err) {
                 callback(err, null);
             } else {

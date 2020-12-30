@@ -1,8 +1,8 @@
-require('./config/database.config.js')();
+require('./config/database.config')();
 require(`dotenv`).config();
 
 const express = require(`express`);
-const route = require(`./app/routes/greeting.route.js`);
+const route = require(`./app/routes/greeting.route`);
 const app = express();
 const PORT = process.env.PORT || 2000
 
@@ -13,9 +13,9 @@ app.use(express.urlencoded({ extended: true }));
  app.use(express.json());
 
 //Initialize the route
-route(app);
+route.routeToController(app);
 
-//listen for requese
+//listen for request
 app.listen(PORT, () => {
     console.log(`server started listening on port 2000 `);
 });
