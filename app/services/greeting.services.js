@@ -1,4 +1,4 @@
-const Greeting = require('../models/greetingMethods');
+const Greeting = require('../models/greetingModel');
 
 class GreetingServiceMethods {
     saveData = (data, callback) => {
@@ -42,7 +42,7 @@ class GreetingServiceMethods {
     }
 
     updateDataById = (MessageId, dataToReplace, callback) => {
-        Greeting.updateData(MessageId, dataToReplace, (err) => {
+        Greeting.updateData(greetingId, dataToReplace, (err) => {
             if (err) {
                 callback(err)
             } else {

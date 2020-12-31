@@ -1,24 +1,33 @@
-const Greeting=require('./greetingSchema')
-/* const mongoose = require(`mongoose`);
+const mongoose = require(`mongoose`);
 const MessageSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
     message: {
         type: String,
         required: true
     },
-})
+},
+    {
+        timestamps: true
+    },
+    { versionKey: true });
 
-const Greeting = mongoose.model(`greetingMessage`, MessageSchema) */
+const Greeting = mongoose.model(`greetingMessage`, MessageSchema);
 
 class GreetingMethods {
     createMessage = (data, callback) => {
-        //const greetingMessage = new Greeting({ message: data });
-        data.save((err, result) => {
+        const greetingMessage = new Greeting(data);
+        greetingMessage.save((err, result) => {
             if (err) {
                 callback(err, null);
             } else {
                 callback(null, result);
             }
         });
+
+        //data.save(callback(err, result));
     }
 
     getAllMessages = (callback) => {
