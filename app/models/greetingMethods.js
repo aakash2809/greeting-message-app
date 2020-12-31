@@ -1,4 +1,5 @@
-const mongoose = require(`mongoose`);
+const Greeting=require('./greetingSchema')
+/* const mongoose = require(`mongoose`);
 const MessageSchema = new mongoose.Schema({
     message: {
         type: String,
@@ -6,16 +7,16 @@ const MessageSchema = new mongoose.Schema({
     },
 })
 
-const Greeting = mongoose.model(`greetingMessage`, MessageSchema)
+const Greeting = mongoose.model(`greetingMessage`, MessageSchema) */
 
-class ApiMethods {
+class GreetingMethods {
     createMessage = (data, callback) => {
-        const greetingMessage = new Greeting({ message: data });
-        greetingMessage.save((err, data) => {
+        //const greetingMessage = new Greeting({ message: data });
+        data.save((err, result) => {
             if (err) {
                 callback(err, null);
             } else {
-                callback(null, data);
+                callback(null, result);
             }
         });
     }
@@ -61,4 +62,4 @@ class ApiMethods {
     }
 }
 
-module.exports = new ApiMethods;
+module.exports = new GreetingMethods;
