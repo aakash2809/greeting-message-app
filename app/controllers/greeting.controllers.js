@@ -10,12 +10,18 @@ class GreetingControllerMethods {
         });
         services.saveData(createMessage, (err, result) => {
             if (err) {
-                res.status(400).send({
-                    message: `greeting message can not be empty`
+                res.send({
+                    success_status: 'false',
+                    error_code: 400,
+                    message: `greeting message can not be empty`,
                 });
             } else {
-              
-               res.send('status:(200)'+'\n'+' message:data inserted successfully' +'\n'+ result);
+                res.send({
+                    success_status: 'true',
+                    success_code: 200,
+                    message: 'data inserted successfully',
+                    data: result
+                })
             }
         })
 
@@ -26,10 +32,16 @@ class GreetingControllerMethods {
         services.retrieveData((err, result) => {
             if (err) {
                 res.status(500).send({
+                    success_status: 'false',
+                    error_code: 500,
                     message: err.message || `Some error occurred while retrieving greeting message.`
                 });
             } else {
-                res.status(200).send(result)
+                res.send({
+                    success_status: 'true',
+                    success_code: 200,
+                    data: result
+                })
             }
         })
     };
@@ -39,6 +51,8 @@ class GreetingControllerMethods {
         services.retrieveDataById(req.params.messageId, (err, result) => {
             if (result === null) {
                 res.status(404).send({
+                    success_status: 'false',
+                    error_code: 404,
                     message: `greeting message not found with id ${req.params.messageId}`
                 });
             } else {
@@ -46,7 +60,7 @@ class GreetingControllerMethods {
             }
         })
     };
-
+    //update data by Id
     update = (req, res) => {
         services.updateDataById(req.params.messageId, {
             name: req.body.name,
@@ -55,10 +69,17 @@ class GreetingControllerMethods {
             (err, result) => {
                 if (err) {
                     res.status(404).send({
+                        success_status: 'false',
+                        error_code: 404,
                         message: `greeting message not found with id ${req.params.messageId}`
                     });
                 } else {
-                    res.send(result);
+                    res.send({
+                        success_status: 'true',
+                        success_code: 200,
+                        message: 'data has been updated',
+                        updated_data: result
+                    });
                 }
             });
     };
@@ -67,11 +88,17 @@ class GreetingControllerMethods {
     delete = (req, res) => {
         services.removeDataById(req.params.messageId, (err, result) => {
             if (result === null) {
-                res.status(404).send({
+                res.send({
+                    success_status: 'false',
+                    error_code: 404,
                     message: `greeting message not found with id ${req.params.messageId}`
                 });
             } else {
-                res.send({ message: 'message deleted successfully! ' });
+                res.send({
+                    success_status: 'true',
+                    success_code: 200,
+                    message: 'message deleted successfully!'
+                });
             }
         })
     }
