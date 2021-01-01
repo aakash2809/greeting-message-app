@@ -1,4 +1,6 @@
 const mongoose = require(`mongoose`);
+const logger = require("../../config/logger");
+
 const MessageSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -12,11 +14,13 @@ const MessageSchema = new mongoose.Schema({
     {
         timestamps: true
     },
-    { versionKey: true });
+);
+
+logger.info('inside model');
 
 const Greeting = mongoose.model(`greetingMessage`, MessageSchema);
 
-class GreetingMethods {
+class GreetingMethods { 
     createMessage = (data, callback) => {
         const greetingMessage = new Greeting(data);
         greetingMessage.save((err, result) => {
@@ -26,10 +30,8 @@ class GreetingMethods {
                 callback(null, result);
             }
         });
-
-        //data.save(callback(err, result));
     }
-
+   
     getAllMessages = (callback) => {
         Greeting.find((err, data) => {
             if (err) {

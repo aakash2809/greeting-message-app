@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const logger = require('./logger');
 require(`dotenv`).config();
 
 module.exports = () => {
@@ -6,9 +7,9 @@ module.exports = () => {
     mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true
     }).then(() => {
-        console.log(`Successfully connected to the database`);
+        logger.info(`Successfully connected to the database`);
     }).catch(err => {
-        console.log('Could not connect to the database. Exiting now...', err);
+        logger.info(`Could not connect to the database. Exiting now... ${err}`);
         process.exit();
     });
 }

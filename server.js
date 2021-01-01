@@ -3,6 +3,7 @@ require(`dotenv`).config();
 
 const express = require(`express`);
 const route = require(`./app/routes/greeting.route`);
+const logger = require('./config/logger');
 const app = express();
 const PORT = process.env.PORT || 2000
 
@@ -10,12 +11,13 @@ const PORT = process.env.PORT || 2000
 app.use(express.urlencoded({ extended: true }));
 
 //parse requests of content-type - application/json
- app.use(express.json());
+app.use(express.json());
 
 //Initialize the route
 route.routeToController(app);
 
 //listen for request
 app.listen(PORT, () => {
-    console.log(`server started listening on port 2000 `);
+    logger.info(`server started listening on port : ${PORT}`);
+
 });
