@@ -1,0 +1,8 @@
+2021-01-02 01:33:32 info: inside model
+2021-01-02 01:33:32 info: server started listening on port : 2000
+2021-01-02 01:33:32 info: Successfully connected to the database
+2021-01-02 01:34:05 info: inside controller,findAll method invoked
+2021-01-02 01:34:05 info: invoking retrieveData method of services
+2021-01-02 01:34:05 info: inside serivces,retrieveData method invoked
+2021-01-02 01:34:05 info: invoking to getAllMessages method of model
+2021-01-02 01:34:05 info:  data has been retrieved
