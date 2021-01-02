@@ -21,7 +21,8 @@ logger.info('inside model');
 const Greeting = mongoose.model(`greetingMessage`, MessageSchema);
 
 class GreetingMethods { 
-    createMessage = (data, callback) => {
+      createMessage = (data, callback) => {
+        logger.info('createMessage method invoked');
         const greetingMessage = new Greeting(data);
         greetingMessage.save((err, result) => {
             if (err) {
@@ -33,6 +34,7 @@ class GreetingMethods {
     }
    
     getAllMessages = (callback) => {
+        logger.info('getAllMessages method invoked');
         Greeting.find((err, data) => {
             if (err) {
                 callback(err, null);
@@ -43,6 +45,7 @@ class GreetingMethods {
     }
 
     getDataById = (data, callback) => {
+        logger.info('getDataById method invoked');
         Greeting.findById(data, (err, result) => {
             if (err) {
                 callback(err, null);
@@ -53,6 +56,7 @@ class GreetingMethods {
     }
 
     deleteDataById(data, callback) {
+        logger.info('deleteDataById method invoked');
         Greeting.findByIdAndDelete(data, (err, result) => {
             if (err) {
                 callback(err, null);
@@ -63,6 +67,7 @@ class GreetingMethods {
     }
 
     updateData(MessageId, dataToUpdate, callback) {
+        logger.info('updateData method invoked');
         Greeting.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (err, result) => {
             if (err) {
                 callback(err, null);
