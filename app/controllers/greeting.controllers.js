@@ -6,6 +6,19 @@ class GreetingControllerMethods {
     create = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
         logger.info(`INVOKED: Create method `, 'info.log');
+        
+       const nameValidationResult = (typeof req.body.name != String);
+       const  messageValidationResult = (typeof req.body.message != String);
+        
+        if (nameValidationResult || messageValidationResult) {
+            res.send({
+                success: false,
+                message: `Datatype did not match `,
+            })
+            logger.error(`ERR000: Datatype did not match `, 'error.log');
+        }
+
+        
 
         const createMessage = {
             name: req.body.name,
@@ -89,6 +102,18 @@ class GreetingControllerMethods {
     update = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
         logger.info(`INVOKED: Update method`, 'info.log');
+
+        nameValidationResult = typeof req.body.name != String
+        messageValidationResult = typeof req.body.message != String
+
+        if (nameValidationResult || messageValidationResult) {
+            res.send({
+                success: false,
+                message: `Datatype did not match `,
+            })
+            logger.error(`ERR000: Datatype did not match `, 'error.log');
+        }
+
         logger.info(`INVOKING: UpdateDataById method of services`, 'info.log');
 
         services.updateDataById(req.params.greetingId, {
