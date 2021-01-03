@@ -1,3 +1,4 @@
+const winston = require("winston/lib/winston/config");
 const logger = require("../../config/logger");
 const services = require(`../services/greeting.services`);
 
