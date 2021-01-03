@@ -6,16 +6,15 @@ const route = require(`./app/routes/greeting.route`);
 const logger = require('./config/logger');
 const app = express();
 const PORT = process.env.PORT || 2000
-
 const swaggerUi = require('swagger-ui-express');
 
-const swaggerDocument = require('./swagger.json');
+/* const swaggerDocument = require('./swagger.json');
 
 var options = {
     explorer: true
   };
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,options));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,options)); */
  
 //parse requests 
 app.use(express.urlencoded({ extended: true }));

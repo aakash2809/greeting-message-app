@@ -18,7 +18,9 @@ const logger = createLogger({
         )
       )
     }),
-    new transports.File({ filename: 'greeting.log' })
+    new transports.File({ filename: 'info.log' }),
+    new transports.File({ filename: 'error.log' }),
+
   ]
 });
 

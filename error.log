@@ -1,0 +1,45 @@
+2021-01-03 02:08:43 info: inside model
+2021-01-03 02:08:45 info: server started listening on port : 2000
+2021-01-03 02:08:45 info: Successfully connected to the database
+2021-01-03 02:09:53 info: inside controller,create method invoked
+2021-01-03 02:11:07 info: inside model
+2021-01-03 02:11:07 info: server started listening on port : 2000
+2021-01-03 02:11:07 info: Successfully connected to the database
+2021-01-03 02:11:52 info: inside model
+2021-01-03 02:11:52 info: server started listening on port : 2000
+2021-01-03 02:11:52 info: Successfully connected to the database
+2021-01-03 02:12:03 info: inside controller,create method invoked
+2021-01-03 02:13:18 info: inside model
+2021-01-03 02:13:18 info: server started listening on port : 2000
+2021-01-03 02:13:18 info: Successfully connected to the database
+2021-01-03 02:14:57 info: inside model
+2021-01-03 02:14:57 info: server started listening on port : 2000
+2021-01-03 02:14:57 info: Successfully connected to the database
+2021-01-03 02:15:13 info: inside controller,create method invoked
+2021-01-03 02:16:37 info: inside model
+2021-01-03 02:16:38 info: server started listening on port : 2000
+2021-01-03 02:16:38 info: Successfully connected to the database
+2021-01-03 02:16:46 info: inside controller,create method invoked
+2021-01-03 02:16:46 info: invoking saveData method of services
+2021-01-03 02:16:46 info: inside serivces,saveData method invoked
+2021-01-03 02:16:46 info: calling to createMessage method of model
+2021-01-03 02:16:46 info: createMessage method invoked
+2021-01-03 02:16:47 error: ERR005: greeting message can not be empty 
+2021-01-03 02:29:43 info: inside model
+2021-01-03 02:29:44 info: server started listening on port : 2000
+2021-01-03 02:29:44 info: Successfully connected to the database
+2021-01-03 02:31:34 info: inside controller,create method invoked
+2021-01-03 02:31:34 info: invoking saveData method of services
+2021-01-03 02:31:34 info: inside serivces,saveData method invoked
+2021-01-03 02:31:34 info: calling to createMessage method of model
+2021-01-03 02:31:34 info: createMessage method invoked
+2021-01-03 02:31:34 error: ERR005: greeting message can not be empty 
+2021-01-03 02:38:48 info: inside model
+2021-01-03 02:38:49 info: server started listening on port : 2000
+2021-01-03 02:38:49 info: Successfully connected to the database
+2021-01-03 02:43:03 info: inside controller,create method invoked
+2021-01-03 02:43:03 info: invoking saveData method of services
+2021-01-03 02:43:03 info: inside serivces,saveData method invoked
+2021-01-03 02:43:03 info: calling to createMessage method of model
+2021-01-03 02:43:03 info: createMessage method invoked
+2021-01-03 02:43:03 error: ERR005: greeting message can not be empty 
