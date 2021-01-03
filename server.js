@@ -7,7 +7,7 @@ const logger = require('./config/logger');
 const app = express();
 const PORT = process.env.PORT || 2000
 const swaggerUi = require('swagger-ui-express');
-
+const swaggerJSDoc = require('swagger-jsdoc')
 /* const swaggerDocument = require('./swagger.json');
 
 var options = {
@@ -24,6 +24,40 @@ app.use(express.json());
 
 //Initialize the route
 route.routeToController(app);
+
+
+
+const option = {
+  definition:{
+    info:{
+      title:'Swagger API demo',
+      version: '4.1.6',
+      description:'demo'
+    }
+  },
+  apis: ["./routes/*.js"] 
+}
+
+const swaggerSpec =swaggerJSDoc(option);
+
+app.use('/api/docs', swaggerUi.serve,swaggerUi.setup(swaggerSpec));
+
+//Routes
+
+/**
+ * @swagger
+ * /api/demo:
+ *  get:
+ *      description: Get demo hello world:
+ *      responses:
+ *          '200':
+ *              description: A successful response 
+ */
+
+app.get('/api/demo', (req,res) =>{
+  res.send('hello');
+});
+console.log(swaggerSpec);
 
 //listen for request
 app.listen(PORT, () => {
