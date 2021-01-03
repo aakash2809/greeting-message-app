@@ -6,10 +6,10 @@ class GreetingControllerMethods {
     create = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
         logger.info(`INVOKED: Create method `, 'info.log');
-        
-       const nameValidationResult = (typeof req.body.name != String);
-       const  messageValidationResult = (typeof req.body.message != String);
-        
+
+        const nameValidationResult = (typeof req.body.name != String);
+        const messageValidationResult = (typeof req.body.message != String);
+
         if (nameValidationResult || messageValidationResult) {
             res.send({
                 success: false,
@@ -17,33 +17,32 @@ class GreetingControllerMethods {
             })
             logger.error(`ERR000: Datatype did not match `, 'error.log');
         }
+        else {
+            const createMessage = {
+                name: req.body.name,
+                message: req.body.message
+            };
 
-        
-
-        const createMessage = {
-            name: req.body.name,
-            message: req.body.message
-        };
-
-        logger.info(`INVOKING: saveData method of services`, 'info.log');
-        services.saveData(createMessage, (err, result) => {
-            if (err) {
-                res.send({
-                    success: false,
-                    status_code: 400,
-                    message: `greeting message can not be empty`,
-                });
-                logger.error(`ERR001: Greeting message can not be empty `, 'error.log');
-            } else {
-                res.send({
-                    success: true,
-                    status_code: 200,
-                    message: 'data inserted successfully',
-                    data: result
-                })
-                logger.info('SUCCESS001:data inserted successfully', 'info.log');
-            }
-        })
+            logger.info(`INVOKING: saveData method of services`, 'info.log');
+            services.saveData(createMessage, (err, result) => {
+                if (err) {
+                    res.send({
+                        success: false,
+                        status_code: 400,
+                        message: `greeting message can not be empty`,
+                    });
+                    logger.error(`ERR001: Greeting message can not be empty `, 'error.log');
+                } else {
+                    res.send({
+                        success: true,
+                        status_code: 200,
+                        message: 'data inserted successfully',
+                        data: result
+                    })
+                    logger.info('SUCCESS001: data inserted successfully', 'info.log');
+                }
+            })
+        }
 
     };
 
@@ -153,7 +152,7 @@ class GreetingControllerMethods {
                     status_code: 404,
                     message: `greeting message not found with id ${req.params.greetingId}`
                 });
-                logger.error(`greeting message not found with id ${req.params.greetingId}`);
+                logger.error(`ERR005: greeting message not found with id ${req.params.greetingId}`);
             } else {
                 res.send({
                     success: true,

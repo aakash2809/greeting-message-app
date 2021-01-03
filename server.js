@@ -8,14 +8,7 @@ const app = express();
 const PORT = process.env.PORT || 2000
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc')
-/* const swaggerDocument = require('./swagger.json');
 
-var options = {
-    explorer: true
-  };
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument,options)); */
- 
 //parse requests 
 app.use(express.urlencoded({ extended: true }));
 
@@ -25,22 +18,20 @@ app.use(express.json());
 //Initialize the route
 route.routeToController(app);
 
-
-
-const option = {
-  definition:{
-    info:{
-      title:'Swagger API demo',
+ const option = {
+  definition: {
+    info: {
+      title: 'Swagger API demo',
       version: '4.1.6',
-      description:'demo'
+      description: 'demo'
     }
   },
-  apis: ["./routes/*.js"] 
+  apis: ['./api/demo']
 }
 
-const swaggerSpec =swaggerJSDoc(option);
+const swaggerSpec = swaggerJSDoc(option);
 
-app.use('/api/docs', swaggerUi.serve,swaggerUi.setup(swaggerSpec));
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); 
 
 //Routes
 
@@ -54,13 +45,13 @@ app.use('/api/docs', swaggerUi.serve,swaggerUi.setup(swaggerSpec));
  *              description: A successful response 
  */
 
-app.get('/api/demo', (req,res) =>{
+app.get('/api/demo', (req, res) => {
   res.send('hello');
 });
 console.log(swaggerSpec);
 
 //listen for request
 app.listen(PORT, () => {
-    logger.info(`CONNECT_SERVER: Connected, server started listening on port : ${PORT}`);
+  logger.info(`CONNECT_SERVER: Connected, server started listening on port : ${PORT}`);
 
 });
