@@ -16,7 +16,7 @@ const logger = createLogger({
 
     new transports.File({ 
       level: 'info',
-      filename: 'info.log',
+      filename: './logs/info.log',
       format: format.combine(
        format.timestamp({
          format: 'YYYY-MM-DD HH:mm:ss'
@@ -27,7 +27,7 @@ const logger = createLogger({
      ) }),
     new transports.File({ 
       level: 'error',
-      filename: 'error.log',
+      filename: './logs/error.log',
       format: format.combine(
        format.timestamp({
         format: 'YYYY-MM-DD HH:mm:ss'

@@ -3,8 +3,9 @@ const logger = require("../../config/logger");
 
 class GreetingServiceMethods {
     saveData = (data, callback) => {
-        logger.info(`inside serivces,saveData method invoked`,'info.log');
-        logger.info(`calling to createMessage method of model`,'info.log');
+        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`INVOKED: saveData`, 'info.log');
+        logger.info(`INVOKING: createMessage method of models`, 'info.log');
 
         Greeting.createMessage(data, (err, result) => {
             if (err) {
@@ -16,8 +17,9 @@ class GreetingServiceMethods {
     }
 
     retrieveData = (callback) => {
-        logger.info(`inside serivces,retrieveData method invoked`,'info.log');
-        logger.info(`invoking to getAllMessages method of model`,'info.log');
+        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`INVOKED: retrieveData`, 'info.log');
+        logger.info(`INVOKING: getAllMessages method of models`, 'info.log');
 
         Greeting.getAllMessages((err, result) => {
             if (err) {
@@ -29,8 +31,9 @@ class GreetingServiceMethods {
     }
 
     retrieveDataById = (data, callback) => {
-        logger.info(`inside serivces,retrieveDataById method invoked`,'info.log');
-        logger.info(`invoking to getDataById method of model`,'info.log');
+        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`INVOKED: retrieveDataById`, 'info.log');
+        logger.info(`INVOKING: getDataById method of models`, 'info.log');
 
         Greeting.getDataById(data, (err, result) => {
             if (err) {
@@ -42,8 +45,9 @@ class GreetingServiceMethods {
     }
 
     removeDataById = (data, callback) => {
-        logger.info(`inside serivces,removeDataById method invoked`,'info.log');
-        logger.info(`invoking to deleteDataById method of model`,'info.log');
+        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`INVOKED: removeDataById`, 'info.log');
+        logger.info(`INVOKING: deleteDataById method of models`, 'info.log');
 
         Greeting.deleteDataById(data, (err, result) => {
             if (err) {
@@ -55,8 +59,9 @@ class GreetingServiceMethods {
     }
 
     updateDataById = (greetingId, dataToReplace, callback) => {
-        logger.info(`inside serivces,removeDataById method invoked`,'info.log');
-        logger.info(`invoking to deleteDataById method of model`,'info.log');
+        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`INVOKED: updateDataById`, 'info.log');
+        logger.info(`INVOKING: updateData method of models`, 'info.log');
 
         Greeting.updateData(greetingId, dataToReplace, (err, result) => {
             if (err) {

@@ -27,6 +27,6 @@ route.routeToController(app);
 
 //listen for request
 app.listen(PORT, () => {
-    logger.info(`server started listening on port : ${PORT}`);
+    logger.info(`CONNECT_SERVER: Connected, server started listening on port : ${PORT}`);
 
 });

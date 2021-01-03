@@ -22,7 +22,8 @@ const Greeting = mongoose.model(`greetingMessage`, MessageSchema);
 
 class GreetingMethods {
     createMessage = (data, callback) => {
-        logger.info('createMessage method invoked','info.log');
+        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`INVOKED: createMessage`, 'info.log');
         const greetingMessage = new Greeting(data);
         greetingMessage.save((err, result) => {
             if (err) {
@@ -34,7 +35,9 @@ class GreetingMethods {
     }
 
     getAllMessages = (callback) => {
-        logger.info('getAllMessages method invoked','info.log');
+        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`INVOKED:  getAllMessages`, 'info.log');
+
         Greeting.find((err, data) => {
             if (err) {
                 callback(err, null);
@@ -45,7 +48,9 @@ class GreetingMethods {
     }
 
     getDataById = (data, callback) => {
-        logger.info('getDataById method invoked','info.log');
+        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`INVOKED:  getDataById`, 'info.log');
+
         Greeting.findById(data, (err, result) => {
             if (err) {
                 callback(err, null);
@@ -56,7 +61,9 @@ class GreetingMethods {
     }
 
     deleteDataById(data, callback) {
-        logger.info('deleteDataById method invoked','info.log');
+        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`INVOKED:  deleteDataById`, 'info.log');
+
         Greeting.findByIdAndDelete(data, (err, result) => {
             if (err) {
                 callback(err, null);
@@ -67,7 +74,9 @@ class GreetingMethods {
     }
 
     updateData(MessageId, dataToUpdate, callback) {
-        logger.info('updateData method invoked','info.log');
+        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`INVOKED:  getDataById`, 'info.log');
+
         Greeting.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (err, result) => {
             if (err) {
                 callback(err, null);

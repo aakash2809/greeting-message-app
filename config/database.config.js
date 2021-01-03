@@ -7,9 +7,9 @@ module.exports = () => {
     mongoose.connect(process.env.MONGODB_URL, {
         useNewUrlParser: true
     }).then(() => {
-        logger.info(`Successfully connected to the database`,'info.log');
+        logger.info(`SUCCESS:Successfully connected to the database`, 'info.log');
     }).catch(err => {
-        logger.info(`Could not connect to the database. Exiting now... ${err}`,'info.log');
+        logger.info(`ERROR: Could not connect to the database. Exiting now... ${err}`, 'info.log');
         process.exit();
     });
 }
