@@ -4,6 +4,12 @@ const logger = require("../../config/logger");
 const MessageSchema = new mongoose.Schema({
     name: {
         type: String,
+        validate: {
+            validator: function(name) {
+              return /^[A-Z]{1}[a-zA-Z]{2,}$/.test(name);
+            },
+            message: () => `should have minimum length 3!`
+          },
         required: true
     },
     message: {

@@ -31,9 +31,9 @@ class GreetingControllerMethods {
                 res.send({
                     success: false,
                     status_code: 400,
-                    message: `greeting message can not be empty`,
+                    message: err.message,
                 });
-                logger.error(`ERR001: Greeting message can not be empty `, 'error.log');
+                logger.error(`ERR001: Greeting message data did not match `, 'error.log');
             } else {
                 res.send({
                     success: true,
