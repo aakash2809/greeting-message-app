@@ -7,7 +7,7 @@ const logger = require('./config/logger');
 const app = express();
 const PORT = process.env.PORT || 2000
 const swaggerUi = require('swagger-ui-express');
-const swaggerJSDoc = require('swagger-jsdoc')
+const swaggerJSDoc = require('swagger-jsdoc');
 
 //parse requests 
 app.use(express.urlencoded({ extended: true }));

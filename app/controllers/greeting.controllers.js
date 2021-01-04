@@ -1,23 +1,24 @@
 const logger = require("../../config/logger");
 const services = require(`../services/greeting.services`);
+const Joi = require('joi');
 
 class GreetingControllerMethods {
     //Create and Save message
     create = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
         logger.info(`INVOKED: Create method `, 'info.log');
+        
+        const schema = Joi.object({
+            name: Joi.string().required(),
+            message: Joi.string().required(),
+        })
 
-        const nameValidationResult = (typeof req.body.name != String);
-        const messageValidationResult = (typeof req.body.message != String);
-
-        if (nameValidationResult || messageValidationResult) {
-            res.send({
-                success: false,
-                message: `Datatype did not match `,
-            })
-            logger.error(`ERR000: Datatype did not match `, 'error.log');
+        let result = schema.validate(req.body)
+        if(result.error){
+            res.status(400).send(result.error.details[0])
+            return ;
         }
-        else {
+               
             const createMessage = {
                 name: req.body.name,
                 message: req.body.message
@@ -42,7 +43,7 @@ class GreetingControllerMethods {
                     logger.info('SUCCESS001: data inserted successfully', 'info.log');
                 }
             })
-        }
+        
 
     };
 
@@ -102,41 +103,42 @@ class GreetingControllerMethods {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
         logger.info(`INVOKED: Update method`, 'info.log');
 
-        nameValidationResult = typeof req.body.name != String
-        messageValidationResult = typeof req.body.message != String
+        const schema = Joi.object({
+            name: Joi.string().required(),
+            message: Joi.string().required(),
+        })
 
-        if (nameValidationResult || messageValidationResult) {
-            res.send({
-                success: false,
-                message: `Datatype did not match `,
-            })
-            logger.error(`ERR000: Datatype did not match `, 'error.log');
+        let result = schema.validate(req.body)
+        if(result.error){
+            res.status(400).send(result.error.details[0])
+            return ;
         }
+        
+            logger.info(`INVOKING: UpdateDataById method of services`, 'info.log');
 
-        logger.info(`INVOKING: UpdateDataById method of services`, 'info.log');
-
-        services.updateDataById(req.params.greetingId, {
-            name: req.body.name,
-            message: req.body.message
-        },
-            (err, result) => {
-                if (err) {
-                    res.send({
-                        success: false,
-                        status_code: 404,
-                        message: `Greeting not found with id ${req.params.greetingId}`
-                    });
-                    logger.error(`ERR004: Greeting  not found with id ${req.params.greetingId}`);
-                } else {
-                    res.send({
-                        success: true,
-                        status_code: 200,
-                        message: 'Data has been updated',
-                        updated_data: result
-                    });
-                    logger.info('SUCCESS004: Data has been updated', 'info.log');
-                }
-            });
+            services.updateDataById(req.params.greetingId, {
+                name: req.body.name,
+                message: req.body.message
+            },
+                (err, result) => {
+                    if (err) {
+                        res.send({
+                            success: false,
+                            status_code: 404,
+                            message: `Greeting not found with id ${req.params.greetingId}`
+                        });
+                        logger.error(`ERR004: Greeting  not found with id ${req.params.greetingId}`);
+                    } else {
+                        res.send({
+                            success: true,
+                            status_code: 200,
+                            message: 'Data has been updated',
+                            updated_data: result
+                        });
+                        logger.info('SUCCESS004: Data has been updated', 'info.log');
+                    }
+                });
+        
     };
 
     //Delete a greeting message with the specified messageId in the request
