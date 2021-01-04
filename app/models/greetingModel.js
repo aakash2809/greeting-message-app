@@ -16,6 +16,8 @@ const MessageSchema = new mongoose.Schema({
     },
 );
 
+MessageSchema.set('versionKey', false);
+
 logger.info('inside model');
 
 const Greeting = mongoose.model(`greetingMessage`, MessageSchema);
