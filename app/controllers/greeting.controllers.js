@@ -10,7 +10,7 @@ class GreetingControllerMethods {
 
         let schemaValidationResult = greetingSchema.validate(req.body)
         if (schemaValidationResult.error) {
-            logger.info(`SCHEMAERROR: Request did not match with schema `, 'info.log');
+            logger.error(`SCHEMAERROR: Request did not match with schema `, 'error.log');
             res.send({
                 success: false,
                 status_code: 400,
@@ -110,7 +110,7 @@ class GreetingControllerMethods {
 
         let schemaValidationResult = greetingSchema.validate(req.body)
         if (schemaValidationResult.error) {
-            logger.info(`SCHEMAERROR: Request did not match with schema `, 'info.log');
+            logger.error(`SCHEMAERROR: Request did not match with schema `, 'error.log');
             res.send({
                 success: false,
                 status_code: 400,
