@@ -1,8 +1,8 @@
 const logger = require("../../config/logger");
-const services = require(`../services/greeting.services`);
+const greetingServices = require(`../services/greeting.services`);
 const greetingSchema = require('../../validation/greeting.schema');
 
-class GreetingControllerMethods {
+class GreetingController {
     //Create and Save message
     create = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
@@ -19,14 +19,14 @@ class GreetingControllerMethods {
             return;
         }
 
-        const createMessage = {
+        const greetingDetails = {
             name: req.body.name,
             message: req.body.message
         };
 
         logger.info(`INVOKING: saveData method of services`, 'info.log');
 
-        services.saveData(createMessage, (err, result) => {
+        greetingServices.saveData(greetingDetails, (err, result) => {
             if (err) {
                 res.send({
                     success: false,
@@ -44,8 +44,6 @@ class GreetingControllerMethods {
                 logger.info('SUCCESS001: data inserted successfully', 'info.log');
             }
         })
-
-
     };
 
     //Retrieve and return all greeting message from the database.
@@ -54,7 +52,7 @@ class GreetingControllerMethods {
         logger.info(`INVOKED: findAll`, 'info.log');
         logger.info(`INVOKING: saveData method of services`, 'info.log');
 
-        services.retrieveData((err, result) => {
+        greetingServices.retrieveData((err, result) => {
             if (err) {
                 res.send({
                     success: false,
@@ -81,7 +79,7 @@ class GreetingControllerMethods {
         logger.info(`INVOKED: findOne`, 'info.log');
         logger.info(`INVOKING: retrieveDataById method of services`, 'info.log');
 
-        services.retrieveDataById(req.params.greetingId, (err, result) => {
+        greetingServices.retrieveDataById(req.params.greetingId, (err, result) => {
             if (result === null) {
                 res.send({
                     success: false,
@@ -121,7 +119,7 @@ class GreetingControllerMethods {
 
         logger.info(`INVOKING: UpdateDataById method of services`, 'info.log');
 
-        services.updateDataById(req.params.greetingId, {
+        greetingServices.updateDataById(req.params.greetingId, {
             name: req.body.name,
             message: req.body.message
         },
@@ -143,7 +141,6 @@ class GreetingControllerMethods {
                     logger.info('SUCCESS004: Data has been updated', 'info.log');
                 }
             });
-
     };
 
     //Delete a greeting message with the specified messageId in the request
@@ -152,7 +149,7 @@ class GreetingControllerMethods {
         logger.info(`INVOKED: delete method`, 'info.log');
         logger.info(`INVOKING: removeDataById method of services`, 'info.log');
 
-        services.removeDataById(req.params.greetingId, (err, result) => {
+        greetingServices.removeDataById(req.params.greetingId, (err, result) => {
             if (result === null) {
                 res.send({
                     success: false,
@@ -174,4 +171,4 @@ class GreetingControllerMethods {
     }
 }
 
-module.exports = new GreetingControllerMethods
+module.exports = new GreetingController

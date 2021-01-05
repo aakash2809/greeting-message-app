@@ -1,7 +1,7 @@
 const mongoose = require(`mongoose`);
 const logger = require("../../config/logger");
 
-const MessageSchema = new mongoose.Schema({
+const messageSchema = new mongoose.Schema({
     name: {
         type: String,
         validate: {
@@ -22,17 +22,17 @@ const MessageSchema = new mongoose.Schema({
     },
 );
 
-MessageSchema.set('versionKey', false);
+messageSchema.set('versionKey', false);
 
 logger.info('inside model');
 
-const Greeting = mongoose.model(`greetingMessage`, MessageSchema);
+const greetingModelInstance = mongoose.model(`greetingMessage`, messageSchema);
 
-class GreetingMethods {
+class GreetingModel {
     createMessage = (data, callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
         logger.info(`INVOKED: createMessage`, 'info.log');
-        const greetingMessage = new Greeting(data);
+        const greetingMessage = new greetingModelInstance(data);
         greetingMessage.save((err, result) => {
             if (err) {
                 callback(err, null);
@@ -46,7 +46,7 @@ class GreetingMethods {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
         logger.info(`INVOKED:  getAllMessages`, 'info.log');
 
-        Greeting.find((err, data) => {
+        greetingModelInstance.find((err, data) => {
             if (err) {
                 callback(err, null);
             } else {
@@ -59,7 +59,7 @@ class GreetingMethods {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
         logger.info(`INVOKED:  getDataById`, 'info.log');
 
-        Greeting.findById(data, (err, result) => {
+        greetingModelInstance.findById(data, (err, result) => {
             if (err) {
                 callback(err, null);
             } else {
@@ -72,7 +72,7 @@ class GreetingMethods {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
         logger.info(`INVOKED:  deleteDataById`, 'info.log');
 
-        Greeting.findByIdAndDelete(data, (err, result) => {
+        greetingModelInstance.findByIdAndDelete(data, (err, result) => {
             if (err) {
                 callback(err, null);
             } else {
@@ -85,7 +85,7 @@ class GreetingMethods {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
         logger.info(`INVOKED:  getDataById`, 'info.log');
 
-        Greeting.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (err, result) => {
+        greetingModelInstance.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (err, result) => {
             if (err) {
                 callback(err, null);
             } else {
@@ -95,4 +95,4 @@ class GreetingMethods {
     }
 }
 
-module.exports = new GreetingMethods;
+module.exports = new GreetingModel;

@@ -11,18 +11,20 @@ class Routes {
  *    post:
  *      summary: insert greeting
  *      description: data validate with the schema and inser to database
- *      requestBody:
- *            schema:
- *              properties:
- *                name:
- *                  type: string
- *                  description: name
- *                message:
- *                  type: string
+ *      parameters:
+ *       - name: name
+ *         in: body
+ *         required: true
+ *         type: string
+ *       - name: message
+ *         in: body
+ *         required: true
+ *         type: string
  *      responses:
  *          '200':
  *              description: A successful response 
  */
+
     app.post('/greetingMessage', greetingMessage.create);
 
     // Retrieve all greeting messages
@@ -33,14 +35,6 @@ class Routes {
     *    get:
     *      summary: retrive All greeting
     *      description: retrive data and give response
-    *      requestBody:
-    *            schema:
-    *              properties:
-    *                name:
-    *                  type: string
-    *                  description: name
-    *                message:
-    *                  type: string
     *      responses:
     *          '200':
     *              description: A successful response 
@@ -105,13 +99,18 @@ class Routes {
  *      summary: delete greeting 
  *      description: delete by id and give response
  *      requestBody:
+ *            content:
+ *               application/json:
  *            schema:
+ *              MessageSchema:
+ *                type: object
  *              properties:
  *                name:
  *                  type: string
- *                  description: name
+ *                  required: true
  *                message:
  *                  type: string
+ *                  required: true
  *      responses:
  *          '200':
  *              description: A successful response 

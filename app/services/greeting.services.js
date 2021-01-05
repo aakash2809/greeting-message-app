@@ -1,13 +1,13 @@
-const Greeting = require('../models/greetingModel');
+const greetingModel = require('../models/greetingModel');
 const logger = require("../../config/logger");
 
-class GreetingServiceMethods {
+class GreetingServices {
     saveData = (data, callback) => {
         logger.info(`TRACKED_PATH: Inside services`, 'info.log');
         logger.info(`INVOKED: saveData`, 'info.log');
         logger.info(`INVOKING: createMessage method of models`, 'info.log');
 
-        Greeting.createMessage(data, (err, result) => {
+        greetingModel.createMessage(data, (err, result) => {
             if (err) {
                 callback(err, null)
             } else {
@@ -21,7 +21,7 @@ class GreetingServiceMethods {
         logger.info(`INVOKED: retrieveData`, 'info.log');
         logger.info(`INVOKING: getAllMessages method of models`, 'info.log');
 
-        Greeting.getAllMessages((err, result) => {
+        greetingModel.getAllMessages((err, result) => {
             if (err) {
                 callback(err, null);
             } else {
@@ -35,7 +35,7 @@ class GreetingServiceMethods {
         logger.info(`INVOKED: retrieveDataById`, 'info.log');
         logger.info(`INVOKING: getDataById method of models`, 'info.log');
 
-        Greeting.getDataById(data, (err, result) => {
+        greetingModel.getDataById(data, (err, result) => {
             if (err) {
                 callback(err, null)
             } else {
@@ -49,7 +49,7 @@ class GreetingServiceMethods {
         logger.info(`INVOKED: removeDataById`, 'info.log');
         logger.info(`INVOKING: deleteDataById method of models`, 'info.log');
 
-        Greeting.deleteDataById(data, (err, result) => {
+        greetingModel.deleteDataById(data, (err, result) => {
             if (err) {
                 callback(err, null)
             } else {
@@ -63,7 +63,7 @@ class GreetingServiceMethods {
         logger.info(`INVOKED: updateDataById`, 'info.log');
         logger.info(`INVOKING: updateData method of models`, 'info.log');
 
-        Greeting.updateData(greetingId, dataToReplace, (err, result) => {
+        greetingModel.updateData(greetingId, dataToReplace, (err, result) => {
             if (err) {
                 callback(err, null)
             } else {
@@ -73,4 +73,4 @@ class GreetingServiceMethods {
     }
 }
 
-module.exports = new GreetingServiceMethods
+module.exports = new GreetingServices
