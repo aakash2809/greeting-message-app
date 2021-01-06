@@ -7,17 +7,36 @@
     },
     "host": "localhost:2000",
     "basePath": "/",
+    "components": {
+        "schemas": {
+            "greetingSchmea": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
     "tags": [
         {
-            "name": "Greetings ",
+            "name": "Greetings",
             "description": "API for users in the system"
         }
+    ],
+    "schemes": [
+        "https",
+        "http"
     ],
     "paths": {
         "/addGreeting": {
             "post": {
                 "tags": [
-                    "greeting"
+                    "Greetings"
                 ],
                 "summary": "Add a new greeting to the greeting schema",
                 "consumes": [
@@ -35,17 +54,29 @@
                         "required": true
                     }
                 ],
+                "schema": {
+                    "$ref": "#/components/schemas/greetingSchmea"
+                },
+                
                 "responses": {
-                    "405": {
-                        "description": "Invalid input"
+                    "400": {
+                        "description": "Bad Request ,Invalid input"
+                    },
+                    "500": {
+                        "description": "internal server error"
+                    },
+                    "200": {
+                        "description": " Datainserted successfully"
                     }
+
+                    
                 }
             }
         },
         "/allGreetings": {
             "get": {
                 "tags": [
-                    "greeting"
+                    "Greetings"
                 ],
                 "summary": "get all greetings",
                 "consumes": [
@@ -55,6 +86,9 @@
                     "application/json"
                 ],
                 "responses": {
+                    "500": {
+                        "description": "internal server error"
+                    },
                     "200": {
                         "description": "retirved successfully"
                     }
@@ -64,7 +98,7 @@
         "/uniqueGreeting/{greetingId}": {
             "get": {
                 "tags": [
-                    "greeting"
+                    "Greetings"
                 ],
                 "summary": "get specific greetings by greetingId",
                 "consumes": [
@@ -73,13 +107,18 @@
                 "produces": [
                     "application/json"
                 ],
-                "parameters":[ {
-                    "in": "path",
-                    "name": "greetingId",
-                    "type": "string",
-                    "required": true
-                }],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "greetingId",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
                 "responses": {
+                    "500": {
+                        "description": "internal server error"
+                    },
                     "200": {
                         "description": "retirved successfully"
                     }
@@ -89,7 +128,7 @@
         "/updateGreeting/{greetingId}": {
             "put": {
                 "tags": [
-                    "greeting"
+                    "Greetings"
                 ],
                 "summary": "update exiting greeting ",
                 "consumes": [
@@ -114,8 +153,11 @@
                     }
                 ],
                 "responses": {
-                    "405": {
-                        "description": "Invalid input"
+                    "404": {
+                        "description": "Greeting  not found with input id"
+                    },
+                    "200": {
+                        "description": "Greeting updated successfully with given id"
                     }
                 }
             }
@@ -123,7 +165,7 @@
         "/greeting/{greetingId}": {
             "delete": {
                 "tags": [
-                    "greeting"
+                    "Greetings"
                 ],
                 "summary": "delete greeting ",
                 "consumes": [
@@ -142,11 +184,15 @@
                     }
                 ],
                 "responses": {
-                    "405": {
-                        "description": "Invalid input"
+                    "404": {
+                        "description": "Greeting  not found with input id"
+                    },
+                    "200": {
+                        "description": "Greeting deleted successfully with given id"
                     }
                 }
             }
         }
     }
+   
 }
