@@ -1,6 +1,6 @@
 const logger = require("../../config/logger");
 const greetingServices = require(`../services/greeting.services`);
-const greetingSchema = require('../../validation/greeting.schema');
+const greetingSchema = require('../middlewares/validation/greeting.schema');
 
 class GreetingController {
     //Create and Save message
