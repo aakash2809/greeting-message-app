@@ -1,0 +1,152 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "4.1.6",
+        "title": "Greeting Message App",
+        "description": "My User Project Application API"
+    },
+    "host": "localhost:2000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Greetings ",
+            "description": "API for users in the system"
+        }
+    ],
+    "paths": {
+        "/addGreeting": {
+            "post": {
+                "tags": [
+                    "greeting"
+                ],
+                "summary": "Add a new greeting to the greeting schema",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "message": "body",
+                        "description": "greeting object that needs to be added to the greeting schema",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/allGreetings": {
+            "get": {
+                "tags": [
+                    "greeting"
+                ],
+                "summary": "get all greetings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "retirved successfully"
+                    }
+                }
+            }
+        },
+        "/uniqueGreeting/{greetingId}": {
+            "get": {
+                "tags": [
+                    "greeting"
+                ],
+                "summary": "get specific greetings by greetingId",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters":[ {
+                    "in": "path",
+                    "name": "greetingId",
+                    "type": "string",
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "retirved successfully"
+                    }
+                }
+            }
+        },
+        "/updateGreeting/{greetingId}": {
+            "put": {
+                "tags": [
+                    "greeting"
+                ],
+                "summary": "update exiting greeting ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "greetingId",
+                        "description": "id that need to be updated",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "message": "body",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/greeting/{greetingId}": {
+            "delete": {
+                "tags": [
+                    "greeting"
+                ],
+                "summary": "delete greeting ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "greetingId",
+                        "description": "id for greeting that need to be deleted",
+                        "type": "string",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    }
+}

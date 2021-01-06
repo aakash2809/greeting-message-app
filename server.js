@@ -6,8 +6,10 @@ const logger = require('./config/logger');
 const app = express();
 const PORT = process.env.PORT || 2000
 const swaggerUi = require('swagger-ui-express');
-const swaggerJSDoc = require('swagger-jsdoc');
-const greetingRoute = require('./app/routes/greeting.route');
+
+swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //parse requests 
 app.use(express.urlencoded({ extended: true }));
@@ -17,25 +19,6 @@ app.use(express.json());
 
 //Initialize the route
 route.routeToController(app);
-
-const option = {
-  definition: {
-    info: {
-      title: 'Greeting Message App',
-      version: '4.1.6',
-      description: 'Demo'
-    }
-  },
-
-  //path to api docs
-  apis: ['./app/routes/greeting.route.js']
-}
-
-const swaggerSpec = swaggerJSDoc(option);
-
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-console.log(swaggerSpec);
 
 //listen for request
 app.listen(PORT, () => {

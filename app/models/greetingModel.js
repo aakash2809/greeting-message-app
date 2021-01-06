@@ -1,7 +1,7 @@
 const mongoose = require(`mongoose`);
 const logger = require("../../config/logger");
 
-const messageSchema = new mongoose.Schema({
+const greetingSchema = new mongoose.Schema({
     name: {
         type: String,
         validate: {
@@ -22,11 +22,11 @@ const messageSchema = new mongoose.Schema({
     },
 );
 
-messageSchema.set('versionKey', false);
+greetingSchema.set('versionKey', false);
 
 logger.info('inside model');
 
-const greetingModelInstance = mongoose.model(`greetingMessage`, messageSchema);
+const greetingModelInstance = mongoose.model(`greetingMessage`, greetingSchema);
 
 class GreetingModel {
     createMessage = (data, callback) => {

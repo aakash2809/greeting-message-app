@@ -162,10 +162,10 @@ class GreetingController {
                 res.send({
                     success: true,
                     status_code: 200,
-                    message: 'message deleted successfully!'
+                    message: 'greeting deleted successfully!'
                 });
 
-                logger.info('SUCCESS004: Message deleted successfully!', 'info.log');
+                logger.info('SUCCESS004: greeting deleted successfully!', 'info.log');
             }
         })
     }
