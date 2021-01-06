@@ -6,7 +6,6 @@ class GreetingController {
     //Create and Save message
     create = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
-        logger.info(`INVOKED: Create method `, 'info.log');
 
         let schemaValidationResult = greetingSchema.validate(req.body)
         if (schemaValidationResult.error) {
@@ -49,8 +48,6 @@ class GreetingController {
     //Retrieve and return all greeting message from the database.
     findAll = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
-        logger.info(`INVOKED: findAll`, 'info.log');
-        logger.info(`INVOKING: saveData method of services`, 'info.log');
 
         greetingServices.retrieveData((err, result) => {
             if (err) {
@@ -76,8 +73,6 @@ class GreetingController {
     //Find a single message with a messageId.
     findOne = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
-        logger.info(`INVOKED: findOne`, 'info.log');
-        logger.info(`INVOKING: retrieveDataById method of services`, 'info.log');
 
         greetingServices.retrieveDataById(req.params.greetingId, (err, result) => {
             if (result === null) {
@@ -104,7 +99,6 @@ class GreetingController {
     //update data by Id
     update = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
-        logger.info(`INVOKED: Update method`, 'info.log');
 
         let schemaValidationResult = greetingSchema.validate(req.body)
         if (schemaValidationResult.error) {
@@ -116,8 +110,6 @@ class GreetingController {
             })
             return;
         }
-
-        logger.info(`INVOKING: UpdateDataById method of services`, 'info.log');
 
         greetingServices.updateDataById(req.params.greetingId, {
             name: req.body.name,
@@ -146,8 +138,6 @@ class GreetingController {
     //Delete a greeting message with the specified messageId in the request
     delete = (req, res) => {
         logger.info(`TRACKED_PATH: Inside controller`);
-        logger.info(`INVOKED: delete method`, 'info.log');
-        logger.info(`INVOKING: removeDataById method of services`, 'info.log');
 
         greetingServices.removeDataById(req.params.greetingId, (err, result) => {
             if (result === null) {

@@ -31,7 +31,7 @@ const greetingModelInstance = mongoose.model(`greetingMessage`, greetingSchema);
 class GreetingModel {
     createMessage = (data, callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
-        logger.info(`INVOKED: createMessage`, 'info.log');
+
         const greetingMessage = new greetingModelInstance(data);
         greetingMessage.save((err, result) => {
             if (err) {
@@ -44,7 +44,6 @@ class GreetingModel {
 
     getAllMessages = (callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
-        logger.info(`INVOKED:  getAllMessages`, 'info.log');
 
         greetingModelInstance.find((err, data) => {
             if (err) {
@@ -57,7 +56,6 @@ class GreetingModel {
 
     getDataById = (data, callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
-        logger.info(`INVOKED:  getDataById`, 'info.log');
 
         greetingModelInstance.findById(data, (err, result) => {
             if (err) {
@@ -70,7 +68,6 @@ class GreetingModel {
 
     deleteDataById(data, callback) {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
-        logger.info(`INVOKED:  deleteDataById`, 'info.log');
 
         greetingModelInstance.findByIdAndDelete(data, (err, result) => {
             if (err) {
@@ -83,7 +80,6 @@ class GreetingModel {
 
     updateData(MessageId, dataToUpdate, callback) {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
-        logger.info(`INVOKED:  getDataById`, 'info.log');
 
         greetingModelInstance.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (err, result) => {
             if (err) {
