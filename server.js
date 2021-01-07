@@ -6,8 +6,7 @@ const logger = require('./config/logger');
 const app = express();
 const PORT = process.env.PORT || 2000
 const swaggerUi = require('swagger-ui-express');
-
-swaggerDocument = require('./app/lib/swagger.json');
+const swaggerDocument = require('./app/lib/swagger.json');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

@@ -5,11 +5,11 @@ const greetingSchema = new mongoose.Schema({
     name: {
         type: String,
         validate: {
-            validator: function(name) {
-              return /^[A-Z]{1}[a-zA-Z]{2,}$/.test(name);
+            validator: function (name) {
+                return /^[A-Z]{1}[a-zA-Z]{2,}$/.test(name);
             },
             message: () => `should have minimum length 3!`
-          },
+        },
         required: true
     },
     message: {
@@ -29,63 +29,63 @@ logger.info('inside model');
 const greetingModelInstance = mongoose.model(`greetingMessage`, greetingSchema);
 
 class GreetingModel {
-    createMessage = (data, callback) => {
+    saveGreeting = (greetingData, callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
-        const greetingMessage = new greetingModelInstance(data);
-        greetingMessage.save((err, result) => {
-            if (err) {
-                callback(err, null);
+        const greetingMessage = new greetingModelInstance(greetingData);
+        greetingMessage.save((error, greetingResult) => {
+            if (error) {
+                callback(error, null);
             } else {
-                callback(null, result);
+                callback(null, greetingResult);
             }
         });
     }
 
-    getAllMessages = (callback) => {
+    getAllGreetings = (callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
-        greetingModelInstance.find((err, data) => {
-            if (err) {
-                callback(err, null);
+        greetingModelInstance.find((error, greetingData) => {
+            if (error) {
+                callback(error, null);
             } else {
-                callback(null, data);
+                callback(null, greetingData);
             }
         });
     }
 
-    getDataById = (data, callback) => {
+    getGreetingDataByGreetingId = (greetingData, callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
-        greetingModelInstance.findById(data, (err, result) => {
-            if (err) {
-                callback(err, null);
+        greetingModelInstance.findById(greetingData, (error, greetingResult) => {
+            if (error) {
+                callback(error, null);
             } else {
-                callback(null, result);
+                callback(null, greetingResult);
             }
         });
     }
 
-    deleteDataById(data, callback) {
+    deleteGreetingDataByGreetingId(greetingData, callback) {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
-        greetingModelInstance.findByIdAndDelete(data, (err, result) => {
-            if (err) {
-                callback(err, null);
+        greetingModelInstance.findByIdAndDelete(greetingData, (error, greetingResult) => {
+            if (error) {
+                callback(error, null);
             } else {
-                callback(null, result);
+                callback(null, greetingResult);
             }
         });
     }
 
-    updateData(MessageId, dataToUpdate, callback) {
+    updateGreetingDataGreetingId(MessageId, dataToUpdate, callback) {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
-        greetingModelInstance.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (err, result) => {
-            if (err) {
-                callback(err, null);
+        greetingModelInstance.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (error, greetingResult) => {
+            if (error) {
+                callback(error, null);
             } else {
-                callback(null, result);;
+                callback(null, greetingResult);;
             }
         });
     }

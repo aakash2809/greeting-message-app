@@ -4,13 +4,13 @@ const greetingSchema = require('../middlewares/validation/greeting.schema');
 
 class GreetingController {
     //Create and Save message
-    create = (req, res) => {
+    addGreeting = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
-        let schemaValidationResult = greetingSchema.validate(req.body)
+        let schemaValidationResult = greetingSchema.validate(request.body)
         if (schemaValidationResult.error) {
             logger.error(`SCHEMAERROR: Request did not match with schema `, 'error.log');
-            res.send({
+            response.send({
                 success: false,
                 status_code: 400,
                 message: schemaValidationResult.error.details[0].message,
@@ -19,26 +19,26 @@ class GreetingController {
         }
 
         const greetingDetails = {
-            name: req.body.name,
-            message: req.body.message
+            name: request.body.name,
+            message: request.body.message
         };
 
         logger.info(`INVOKING: saveData method of services`, 'info.log');
 
-        greetingServices.saveData(greetingDetails, (err, result) => {
-            if (err) {
-                res.send({
+        greetingServices.saveGreetingData(greetingDetails, (error, greetingResult) => {
+            if (error) {
+                response.send({
                     success: false,
                     status_code: 400,
-                    message: err.message,
+                    message: error.message,
                 });
                 logger.error(`ERR001: Greeting message data did not match `, 'error.log');
             } else {
-                res.send({
+                response.send({
                     success: true,
                     status_code: 200,
                     message: 'data inserted successfully',
-                    data: result
+                    data: greetingResult
                 })
                 logger.info('SUCCESS001: data inserted successfully', 'info.log');
             }
@@ -46,23 +46,23 @@ class GreetingController {
     };
 
     //Retrieve and return all greeting message from the database.
-    findAll = (req, res) => {
+    findAllGreetings = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
-        greetingServices.retrieveData((err, result) => {
-            if (err) {
-                res.send({
+        greetingServices.retrieveGreetingData((error, greetingResult) => {
+            if (error) {
+                response.send({
                     success: false,
                     status_code: 500,
-                    message: err.message || `Some error occurred while retrieving greeting message.`
+                    message: error.message || `Some error occurred while retrieving greeting message.`
                 });
                 logger.error(`ERR002: Some error occurred while retrieving greeting message.`, 'error.log');
             } else {
-                res.send({
+                response.send({
                     success: true,
                     status_code: 200,
                     message: ' data has been retrieved',
-                    data: result
+                    data: greetingResult
                 })
 
                 logger.info('SUCCESS002:All data has been retrieved', 'info.log');
@@ -71,24 +71,24 @@ class GreetingController {
     };
 
     //Find a single message with a messageId.
-    findOne = (req, res) => {
+    findGreetingByGreetingId = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
-        greetingServices.retrieveDataById(req.params.greetingId, (err, result) => {
-            if (result === null) {
-                res.send({
+        greetingServices.retrieveGreetingDataById(request.params.greetingId, (error, greetinResult) => {
+            if (greetinResult === null) {
+                response.send({
                     success: false,
                     status_code: 404,
-                    message: `Greeting not found with id ${req.params.greetingId}`
+                    message: `Greeting not found with id ${request.params.greetingId}`
                 });
 
-                logger.error(`ERR003: Greeting  not found with id ${req.params.greetingId}`);
+                logger.error(`ERR003: Greeting  not found with id ${request.params.greetingId}`);
             } else {
-                res.send({
+                response.send({
                     success: true,
                     status_code: 200,
                     message: 'data retrived',
-                    data: result
+                    data: greetinResult
                 });
 
                 logger.info('SUCCESS003: Data retrieved', 'info.log');
@@ -97,13 +97,13 @@ class GreetingController {
     };
 
     //update data by Id
-    update = (req, res) => {
+    updateGreetingByGreetingId = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
-        let schemaValidationResult = greetingSchema.validate(req.body)
+        let schemaValidationResult = greetingSchema.validate(request.body)
         if (schemaValidationResult.error) {
             logger.error(`SCHEMAERROR: Request did not match with schema `, 'error.log');
-            res.send({
+            response.send({
                 success: false,
                 status_code: 400,
                 message: schemaValidationResult.error.details[0].message,
@@ -111,24 +111,24 @@ class GreetingController {
             return;
         }
 
-        greetingServices.updateDataById(req.params.greetingId, {
-            name: req.body.name,
-            message: req.body.message
+        greetingServices.updateDataById(request.params.greetingId, {
+            name: request.body.name,
+            message: request.body.message
         },
-            (err, result) => {
-                if (err) {
-                    res.send({
+            (error, greetingResult) => {
+                if (error) {
+                    response.send({
                         success: false,
                         status_code: 404,
-                        message: `Greeting not found with id ${req.params.greetingId}`
+                        message: `Greeting not found with id ${request.params.greetingId}`
                     });
-                    logger.error(`ERR004: Greeting  not found with id ${req.params.greetingId}`);
+                    logger.error(`ERR004: Greeting  not found with id ${request.params.greetingId}`);
                 } else {
-                    res.send({
+                    response.send({
                         success: true,
                         status_code: 200,
                         message: 'Data has been updated',
-                        updated_data: result
+                        updated_data: greetingResult
                     });
                     logger.info('SUCCESS004: Data has been updated', 'info.log');
                 }
@@ -136,20 +136,20 @@ class GreetingController {
     };
 
     //Delete a greeting message with the specified messageId in the request
-    delete = (req, res) => {
+    deleteGreetingByGreetingId = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`);
 
-        greetingServices.removeDataById(req.params.greetingId, (err, result) => {
-            if (result === null) {
-                res.send({
+        greetingServices.removeDataById(request.params.greetingId, (error, greetingResult) => {
+            if (greetingResult === null) {
+                response.send({
                     success: false,
                     status_code: 404,
-                    message: `greeting message not found with id ${req.params.greetingId}`
+                    message: `greeting message not found with id ${request.params.greetingId}`
                 });
 
-                logger.error(`ERR005: greeting message not found with id ${req.params.greetingId}`);
+                logger.error(`ERR005: greeting message not found with id ${request.params.greetingId}`);
             } else {
-                res.send({
+                response.send({
                     success: true,
                     status_code: 200,
                     message: 'greeting deleted successfully!'
