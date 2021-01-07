@@ -1,27 +1,12 @@
 {
     "swagger": "2.0",
     "info": {
-        "version": "4.1.6",
+        "version": "1.0",
         "title": "Greeting Message App",
         "description": "My User Project Application API"
     },
     "host": "localhost:2000",
     "basePath": "/",
-    "components": {
-        "schemas": {
-            "greetingSchmea": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
-                    "message": {
-                        "type": "string"
-                    }
-                }
-            }
-        }
-    },
     "tags": [
         {
             "name": "Greetings",
@@ -29,7 +14,6 @@
         }
     ],
     "schemes": [
-        "https",
         "http"
     ],
     "paths": {
@@ -48,29 +32,30 @@
                 "parameters": [
                     {
                         "in": "body",
-                        "name": "body",
-                        "message": "body",
-                        "description": "greeting object that needs to be added to the greeting schema",
-                        "required": true
+                        "name": "Greeting",
+                        "description": "greeting object that needs to be added to the greeting",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Greeting"
+                        }
                     }
                 ],
-                "schema": {
-                    "$ref": "#/components/schemas/greetingSchmea"
-                },
-                
                 "responses": {
+                    "200": {
+                        "description": " Data inserted successfully"
+                    },
                     "400": {
                         "description": "Bad Request ,Invalid input"
-                    },
-                    "500": {
-                        "description": "internal server error"
-                    },
-                    "200": {
-                        "description": " Datainserted successfully"
                     }
-
-                    
-                }
+                },
+                "security": [
+                    {
+                        "greeting_messagge_app_auth": [
+                            "write:Greeting",
+                            "read:Greeting"
+                        ]
+                    }
+                ]
             }
         },
         "/allGreetings": {
@@ -86,13 +71,18 @@
                     "application/json"
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Greetings retrieved successfully"
+                    },
                     "500": {
                         "description": "internal server error"
-                    },
-                    "200": {
-                        "description": "retirved successfully"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         },
         "/uniqueGreeting/{greetingId}": {
@@ -116,11 +106,11 @@
                     }
                 ],
                 "responses": {
-                    "500": {
-                        "description": "internal server error"
-                    },
                     "200": {
-                        "description": "retirved successfully"
+                        "description": "greeting retrieved successfully"
+                    },
+                    "404": {
+                        "description": "Greeting  not found with input id"
                     }
                 }
             }
@@ -141,23 +131,26 @@
                     {
                         "in": "path",
                         "name": "greetingId",
-                        "description": "id that need to be updated",
+                        "type": "string",
+                        "description": "id that need to be updated successfully",
                         "required": true
                     },
                     {
                         "in": "body",
-                        "name": "body",
-                        "message": "body",
-                        "type": "string",
-                        "required": true
+                        "name": "Greeting",
+                        "description": "greeting object that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Greeting"
+                        }
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Greeting updated with input id"
+                    },
                     "404": {
                         "description": "Greeting  not found with input id"
-                    },
-                    "200": {
-                        "description": "Greeting updated successfully with given id"
                     }
                 }
             }
@@ -184,15 +177,52 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Greeting deleted successfully with input id"
+                    },
                     "404": {
                         "description": "Greeting  not found with input id"
                     },
-                    "200": {
-                        "description": "Greeting deleted successfully with given id"
+                    "500": {
+                        "description": "Internal Server Error"
                     }
                 }
             }
         }
+    },
+    "definitions": {
+        "Greeting": {
+            "type": "object",
+            "required": [
+                "name",
+                "message"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Aakash"
+                },
+                "message": {
+                    "type": "string",
+                    "example": "Hello"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "greeting_messagge_app_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "http:",
+            "flow": "implicit",
+            "scopes": {
+                "write:Greeting": "modify Greeting in database",
+                "read:Greeting": "read your Greetings"
+            }
+        },
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        }
     }
-   
 }
