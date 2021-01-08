@@ -1,19 +1,32 @@
-const logger = require("../../config/logger");
+/**
+ * @module       controllers
+ * @description  controllers is reponsible to accept request and send the response
+ * Controller resolve the error using the service layer by invoking its services
+ * @requires     greetingServices is a refernce for invoking the services of service layer
+ * @requires     greetingSchema   is a reference for the joi validation
+ * @requires     logger           is a reference to save logs in log files
+-----------------------------------------------------------------------------------------------*/
+
+const logger           = require("../../config/logger");
 const greetingServices = require(`../services/greeting.services`);
-const greetingSchema = require('../middlewares/validation/greeting.schema');
+const greetingSchema   = require('../middlewares/validation/greeting.schema');
 
 class GreetingController {
-    //Create and Save message
+    /**
+     * @description add greeting to database
+     * @param {*} request takes greeting in json formate
+     * @param {*} response sends response from server
+    */
     addGreeting = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
-        let schemaValidationResult = greetingSchema.validate(request.body)
-        if (schemaValidationResult.error) {
+        let requestValidationResult = greetingSchema.validate(request.body)
+        if (requestValidationResult.error) {
             logger.error(`SCHEMAERROR: Request did not match with schema `, 'error.log');
             response.send({
                 success: false,
                 status_code: 400,
-                message: schemaValidationResult.error.details[0].message,
+                message: requestValidationResult.error.details[0].message,
             })
             return;
         }
@@ -45,7 +58,12 @@ class GreetingController {
         })
     };
 
-    //Retrieve and return all greeting message from the database.
+
+    /**
+     * @description Retrieve and return all greetings from the database.
+     * @param {*} request does not take any parameter
+     * @param {*} response sends response from server
+    */
     findAllGreetings = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
@@ -70,7 +88,11 @@ class GreetingController {
         })
     };
 
-    //Find a single message with a messageId.
+    /**
+     * @description Retrieve and return greeting associated with _id ,from the database.
+     * @param {*} request takes _id that is greetingID
+     * @param {*} response sends response from server
+    */
     findGreetingByGreetingId = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
@@ -96,7 +118,11 @@ class GreetingController {
         })
     };
 
-    //update data by Id
+    /**
+     * @description update greeting data by _id
+     * @param {*} request takes _id that is greetingID
+     * @param {*} response sends response from server
+    */
     updateGreetingByGreetingId = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
 
@@ -111,7 +137,7 @@ class GreetingController {
             return;
         }
 
-        greetingServices.updateDataById(request.params.greetingId, {
+        greetingServices.updateGreetingDataById(request.params.greetingId, {
             name: request.body.name,
             message: request.body.message
         },
@@ -135,11 +161,15 @@ class GreetingController {
             });
     };
 
-    //Delete a greeting message with the specified messageId in the request
+    /**
+     * @description delete greeting  by _id that is greetingId
+     * @param {*} request takes _id that is greetingID
+     * @param {*} response sends response from server
+    */
     deleteGreetingByGreetingId = (request, response) => {
         logger.info(`TRACKED_PATH: Inside controller`);
 
-        greetingServices.removeDataById(request.params.greetingId, (error, greetingResult) => {
+        greetingServices.removeGreetingDataById(request.params.greetingId, (error, greetingResult) => {
             if (greetingResult === null) {
                 response.send({
                     success: false,

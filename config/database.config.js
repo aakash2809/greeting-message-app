@@ -1,5 +1,11 @@
+/**
+ *  @description  Returns a promise that gets resolved when successfully connected 
+ *                to MongoDB URL otherwise return error message
+ * @requires      {@link http://mongoosejs.com/|mongoose}
+ * @requires      logger  is a reference to save logs in log files
+----------------------------------------------------------------------------------------------------*/
 const mongoose = require('mongoose');
-const logger = require('./logger');
+const logger   = require('./logger');
 require(`dotenv`).config();
 
 module.exports = () => {
