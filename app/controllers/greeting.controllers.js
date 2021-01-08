@@ -1,10 +1,12 @@
 /**
  * @module       controllers
  * @description  controllers is reponsible to accept request and send the response
- * Controller resolve the error using the service layer by invoking its services
+ *               Controller resolve the error using the service layer by invoking its services
  * @requires     greetingServices is a refernce for invoking the services of service layer
  * @requires     greetingSchema   is a reference for the joi validation
  * @requires     logger           is a reference to save logs in log files
+ * @author       Aakash Rajak <aakashrajak2809@gmail.com>
+ * @since        24/12/2020
 -----------------------------------------------------------------------------------------------*/
 
 const logger           = require("../../config/logger");

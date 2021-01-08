@@ -1,3 +1,12 @@
+/**
+ * @module        config
+ * @file          logger.js
+ * @description   This file contains the defination of winston transports
+ * @requires      {@link https://www.npmjs.com/package/winston | winston}
+ * @author        Aakash Rajak <aakashrajak2809@gmail.com>
+*  @since         04/01/2021
+------------------------------------------------------------------------------------------*/
+
 const winston = require('winston');
 
 const logger = winston.createLogger({

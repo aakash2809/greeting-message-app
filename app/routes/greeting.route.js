@@ -1,3 +1,13 @@
+/**
+* @module    routes
+* @file      greeting.route.js
+* @desc      This file is an entry point for application 
+* @requires  controllers holdes by greetingMessage which is the reference 
+*                        to invoke methods of controller/greeting.controller.js
+* @author    Aakash Rajak <aakashrajak2809@gmail.com>
+* @since     24/12/2020
+*-----------------------------------------------------------------------------------------------------*/
+
 const greetingMessage = require(`../controllers/greeting.controllers`);
 
 class Routes {

@@ -1,3 +1,11 @@
+/**
+ * @module         services
+ * @file           greeting.services.js
+ * @description    This file contain all the service method for greetings
+ * @requires       greetingModel  is refrence to invoke methods of greetingModel.js     
+ * @author         Aakash Rajak <aakashrajak2809@gmail.com>
+ * @since          24/12/2020          
+------------------------------------------------------------------------------------------*/
 const greetingModel = require('../models/greetingModel');
 const logger        = require("../../config/logger");
 

@@ -1,6 +1,16 @@
-const mongoose = require(`mongoose`);
-const logger = require("../../config/logger");
+/**
+ * @module       models
+ * @file         greetingModel.js
+ * @description  This module is used for creating the schema and comunicate with mongodb
+ *               through mongoose
+ * @requires     {@link http://mongoosejs.com/|mongoose} 
+ * @requires     logger is a reference to save logs in log files
+ * @author       Aakash Rajak <aakashrajak2809@gmail.com>
+ * @since        24/12/2020
+------------------------------------------------------------------------------------------*/
 
+const mongoose       = require(`mongoose`);
+const logger         = require("../../config/logger");
 const greetingSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -29,11 +39,11 @@ logger.info('inside model');
 const greetingModelInstance = mongoose.model(`greetingMessage`, greetingSchema);
 
 class GreetingModel {
-   /**
-     * @description save request greeting data to database 
-     * @param {*} greetingData holds data to be saved in json formate
-     * @param {*} callback holds a function 
-    */
+    /**
+      * @description save request greeting data to database 
+      * @param {*} greetingData holds data to be saved in json formate
+      * @param {*} callback holds a function 
+     */
     saveGreeting = (greetingData, callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
@@ -47,10 +57,10 @@ class GreetingModel {
         });
     }
 
-     /**
-     * @description retrive all greeting data from database 
-     * @param {*} callback holds a function 
-    */
+    /**
+    * @description retrive all greeting data from database 
+    * @param {*} callback holds a function 
+   */
     getAllGreetings = (callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
@@ -63,11 +73,11 @@ class GreetingModel {
         });
     }
 
-     /**
-      * @description retrive one greeting data from database 
-      * @param {*} greetingID holds _id that is greeting id
-      * @param {*} callback holds a function 
-     */
+    /**
+     * @description retrive one greeting data from database 
+     * @param {*} greetingID holds _id that is greeting id
+     * @param {*} callback holds a function 
+    */
     getGreetingDataByGreetingId = (greetingId, callback) => {
         logger.info(`TRACKED_PATH: Inside model`, 'info.log');
 
@@ -79,7 +89,7 @@ class GreetingModel {
             }
         });
     }
-    
+
     /**
      * @description remove greeting data from database 
      * @param {*} greetingId holds _id that is greeting id

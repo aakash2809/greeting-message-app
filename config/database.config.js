@@ -1,8 +1,12 @@
 /**
- *  @description  Returns a promise that gets resolved when successfully connected 
+ * @module        config
+ * @file          database.config.js
+ * @description   Returns a promise that gets resolved when successfully connected 
  *                to MongoDB URL otherwise return error message
  * @requires      {@link http://mongoosejs.com/|mongoose}
  * @requires      logger  is a reference to save logs in log files
+ * @author        Aakash Rajak <aakashrajak2809@gmail.com>
+ * @since         24/12/2020
 ----------------------------------------------------------------------------------------------------*/
 const mongoose = require('mongoose');
 const logger   = require('./logger');

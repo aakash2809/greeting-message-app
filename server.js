@@ -1,9 +1,13 @@
-
 /**
-* @desc   This server.js is an entry point for application.
-* @requires {@link https://www.npmjs.com/package/swagger-ui-express|swaggerUi}
-* @requires {@link https://expressjs.com/|app}
-*
+* @file          server.js
+* @description   This file is an entry point for application 
+* @requires      {@link https://www.npmjs.com/package/swagger-ui-express|swaggerUi}
+* @requires      {@link https://expressjs.com/|express }
+* @requires      'dotenv'     to enable .env (port)
+* @requires      route        is a reference to initialize route 
+* @requires      logger       is a reference to save logs in log files
+* @author        Aakash Rajak <aakashrajak2809@gmail.com>
+* @since         24/12/2020
 *-----------------------------------------------------------------------------------------------------*/
 
 require('./config/database.config')();
