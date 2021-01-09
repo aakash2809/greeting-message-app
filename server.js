@@ -9,8 +9,7 @@
 * @author        Aakash Rajak <aakashrajak2809@gmail.com>
 * @since         24/12/2020
 *-----------------------------------------------------------------------------------------------------*/
-
-require('./config/database.config')();
+const dbconnection = require('./config/database.config');
 require(`dotenv`).config();
 
 const express         = require(`express`);
@@ -37,3 +36,6 @@ app.listen(PORT, () => {
   logger.info(`CONNECT_SERVER: Connected, server started listening on port : ${PORT}`);
 
 });
+
+dbconnection();
+new dbconnection().connect();
