@@ -7,9 +7,8 @@
 *  @since         04/01/2021
 ------------------------------------------------------------------------------------------*/
 
-const winston = require('winston');
-
-const logger = winston.createLogger({
+const winston   = require('winston');
+/* const logger    = winston.createLogger({
   transports: [
      new winston.transports.File({
       level: 'info',
@@ -31,14 +30,30 @@ const logger = winston.createLogger({
         winston.format.timestamp({
           format: 'YYYY-MM-DD HH:mm:ss'
         }),
-        winston.format.printf(
+
+         winston.format.printf(
           error => `${error.timestamp} ${error.level}: ${error.message}`
-        )
+        ) 
       )
-    })
+    }) ]
+}); */
 
+const logger = winston.createLogger({
 
+  transports: [
+   
+    new winston.transports.File({
+      filename: './logs/info.log',
+      
+      level: 0,
+      
+    }),
+     new winston.transports.File({
+      filename: './logs/error.log',
+      level: 3
+    
+    }) 
   ]
 });
 
-module.exports = logger;
+module.exports  = logger;

@@ -45,7 +45,7 @@ class GreetingModel {
       * @param {*} callback holds a function 
      */
     saveGreeting = (greetingData, callback) => {
-        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside model`);
 
         const greetingMessage = new greetingModelInstance(greetingData);
         greetingMessage.save((error, greetingResult) => {
@@ -62,7 +62,7 @@ class GreetingModel {
     * @param {*} callback holds a function 
    */
     getAllGreetings = (callback) => {
-        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside model`);
 
         greetingModelInstance.find((error, greetingData) => {
             if (error) {
@@ -79,7 +79,7 @@ class GreetingModel {
      * @param {*} callback holds a function 
     */
     getGreetingDataByGreetingId = (greetingId, callback) => {
-        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside model`);
 
         greetingModelInstance.findById(greetingId, (error, greetingResult) => {
             if (error) {
@@ -96,7 +96,7 @@ class GreetingModel {
      * @param {*} callback holds a function 
     */
     deleteGreetingDataByGreetingId(greetingData, callback) {
-        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside model`);
 
         greetingModelInstance.findByIdAndDelete(greetingData, (error, greetingResult) => {
             if (error) {
@@ -114,7 +114,7 @@ class GreetingModel {
     * @param {*} callback holds a function 
    */
     updateGreetingDataGreetingId(MessageId, dataToUpdate, callback) {
-        logger.info(`TRACKED_PATH: Inside model`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside model`);
 
         greetingModelInstance.findByIdAndUpdate(MessageId, dataToUpdate, { new: true }, (error, greetingResult) => {
             if (error) {

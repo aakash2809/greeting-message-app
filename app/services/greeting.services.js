@@ -16,7 +16,7 @@ class GreetingServices {
      * @param {*} callback holds a function 
     */
     saveGreetingData = (greetingData, callback) => {
-        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside services`);
 
         greetingModel.saveGreeting(greetingData, (error, greetingResult) => {
             if (error) {
@@ -32,7 +32,7 @@ class GreetingServices {
      * @param {*} callback holds a function 
     */
     retrieveGreetingData = (callback) => {
-        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside services`);
 
         greetingModel.getAllGreetings((error, greetingResult) => {
             if (error) {
@@ -49,7 +49,7 @@ class GreetingServices {
       * @param {*} callback holds a function 
      */
     retrieveGreetingDataById = (greetingID, callback) => {
-        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside services`);
 
         greetingModel.getGreetingDataByGreetingId(greetingID, (error, greetingResult) => {
             if (error) {
@@ -66,7 +66,7 @@ class GreetingServices {
      * @param {*} callback holds a function 
     */
     removeGreetingDataById = (greetingId, callback) => {
-        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside services`);
 
         greetingModel.deleteGreetingDataByGreetingId(greetingId, (error, greetingResult) => {
             if (error) {
@@ -84,7 +84,7 @@ class GreetingServices {
       * @param {*} callback holds a function 
      */
     updateGreetingDataById = (greetingId, dataToReplace, callback) => {
-        logger.info(`TRACKED_PATH: Inside services`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside services`);
 
         greetingModel.updateGreetingDataGreetingId(greetingId, dataToReplace, (error, greetingResult) => {
             if (error) {

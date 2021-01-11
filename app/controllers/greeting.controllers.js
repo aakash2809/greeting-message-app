@@ -11,7 +11,7 @@
 
 const logger           = require("../../config/logger");
 const greetingServices = require(`../services/greeting.services`);
-const greetingSchema   = require('../middlewares/validation/greeting.schema');
+const greetingSchema   = require('../middlewares/validation/greeting.schema.joi.validator');
 
 class GreetingController {
     /**
@@ -20,11 +20,11 @@ class GreetingController {
      * @param {*} response sends response from server
     */
     addGreeting = (request, response) => {
-        logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside controller`);
 
         let requestValidationResult = greetingSchema.validate(request.body)
         if (requestValidationResult.error) {
-            logger.error(`SCHEMAERROR: Request did not match with schema `, 'error.log');
+            logger.error(`SCHEMAERROR: Request did not match with schema `);
             response.send({
                 success: false,
                 status_code: 400,
@@ -38,7 +38,7 @@ class GreetingController {
             message: request.body.message
         };
 
-        logger.info(`INVOKING: saveData method of services`, 'info.log');
+        logger.info(`INVOKING: saveData method of services`);
 
         greetingServices.saveGreetingData(greetingDetails, (error, greetingResult) => {
             if (error) {
@@ -47,7 +47,7 @@ class GreetingController {
                     status_code: 400,
                     message: error.message,
                 });
-                logger.error(`ERR001: Greeting message data did not match `, 'error.log');
+                logger.error(`ERR001: Greeting message data did not match `);
             } else {
                 response.send({
                     success: true,
@@ -55,7 +55,7 @@ class GreetingController {
                     message: 'data inserted successfully',
                     data: greetingResult
                 })
-                logger.info('SUCCESS001: data inserted successfully', 'info.log');
+                logger.info('SUCCESS001: data inserted successfully');
             }
         })
     };
@@ -67,7 +67,7 @@ class GreetingController {
      * @param {*} response sends response from server
     */
     findAllGreetings = (request, response) => {
-        logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside controller`);
 
         greetingServices.retrieveGreetingData((error, greetingResult) => {
             if (error) {
@@ -76,7 +76,7 @@ class GreetingController {
                     status_code: 500,
                     message: error.message || `Some error occurred while retrieving greeting message.`
                 });
-                logger.error(`ERR002: Some error occurred while retrieving greeting message.`, 'error.log');
+                logger.error(`ERR002: Some error occurred while retrieving greeting message.`);
             } else {
                 response.send({
                     success: true,
@@ -85,7 +85,7 @@ class GreetingController {
                     data: greetingResult
                 })
 
-                logger.info('SUCCESS002:All data has been retrieved', 'info.log');
+                logger.info('SUCCESS002:All data has been retrieved');
             }
         })
     };
@@ -96,7 +96,7 @@ class GreetingController {
      * @param {*} response sends response from server
     */
     findGreetingByGreetingId = (request, response) => {
-        logger.info(`TRACKED_PATH: Inside controller`, 'info.log');
+        logger.info(`TRACKED_PATH: Inside controller`);
 
         greetingServices.retrieveGreetingDataById(request.params.greetingId, (error, greetinResult) => {
             if (greetinResult === null) {
@@ -115,7 +115,7 @@ class GreetingController {
                     data: greetinResult
                 });
 
-                logger.info('SUCCESS003: Data retrieved', 'info.log');
+                logger.info('SUCCESS003: Data retrieved');
             }
         })
     };
@@ -130,7 +130,7 @@ class GreetingController {
 
         let schemaValidationResult = greetingSchema.validate(request.body)
         if (schemaValidationResult.error) {
-            logger.error(`SCHEMAERROR: Request did not match with schema `, 'error.log');
+            logger.error(`SCHEMAERROR: Request did not match with schema `);
             response.send({
                 success: false,
                 status_code: 400,
@@ -158,7 +158,7 @@ class GreetingController {
                         message: 'Data has been updated',
                         updated_data: greetingResult
                     });
-                    logger.info('SUCCESS004: Data has been updated', 'info.log');
+                    logger.info('SUCCESS004: Data has been updated');
                 }
             });
     };
@@ -187,7 +187,7 @@ class GreetingController {
                     message: 'greeting deleted successfully!'
                 });
 
-                logger.info('SUCCESS004: greeting deleted successfully!', 'info.log');
+                logger.info('SUCCESS004: greeting deleted successfully!');
             }
         })
     }
