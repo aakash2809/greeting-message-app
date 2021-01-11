@@ -8,7 +8,8 @@
 ------------------------------------------------------------------------------------------*/
 
 const winston   = require('winston');
-/* const logger    = winston.createLogger({
+
+ const logger    = winston.createLogger({
   transports: [
      new winston.transports.File({
       level: 'info',
@@ -36,24 +37,6 @@ const winston   = require('winston');
         ) 
       )
     }) ]
-}); */
-
-const logger = winston.createLogger({
-
-  transports: [
-   
-    new winston.transports.File({
-      filename: './logs/info.log',
-      
-      level: 0,
-      
-    }),
-     new winston.transports.File({
-      filename: './logs/error.log',
-      level: 3
-    
-    }) 
-  ]
-});
+}); 
 
 module.exports  = logger;
