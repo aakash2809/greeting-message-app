@@ -1,6 +1,6 @@
 let chai = require('chai');
 let server = require('../server');
-let chaiHttp = require('chai-http');
+const chaiHttp = require('chai-http');
 
 chai.should();
 
@@ -16,7 +16,6 @@ describe('Test API', () => {
         chai.request(server)
         .get('/allGreetings')
         .end((error,response)=>{
-            console.log(response.body);
             response.should.have.status(200);
             response.body.should.be.a('Object');
             done();
@@ -55,9 +54,44 @@ describe('Test API', () => {
     /**
     * Test the PUT route
      */
-
+    describe('PUT /updateGreeting/:greetingId',()=>{
+        it('It should update the task', (done)=>{
+            const greetingId = '60045735cd3728136899f043';
+            const greetingDetails = {
+                name: "Priya",
+                message: "Hello"
+            };
+            chai.request(server)
+            .put('/updateGreeting/:greetingId' + greetingId)
+            .send(greetingDetails)
+            .end((error,response)=>{ 
+                response.should.have.status(200);
+                response.body.should.be.a('Object');
+               done();
+            })
+        })
+    })
     /**
     * Test the DELETE route
    */
-
+  describe('DELETE /greeting/:greetingId',()=>{
+    it('It should delete an existing greeting', (done)=>{
+        const greetingId = '60045735cd3728136899f043';
+        chai.request(server)
+        .delete('/greeting/:greetingId' + greetingId)
+        .end((error,response)=>{ 
+            response.should.have.status(200);
+           done();
+        })
+    })
+    it('It should delete an existing greeting', (done)=>{
+        const greetingId = '60045735cd3728136899';
+        chai.request(server)
+        .delete('/greeting/:greetingId' + greetingId)
+        .end((error,response)=>{ 
+            response.should.have.status(404);
+           done();
+        })
+    })
+})
 });
