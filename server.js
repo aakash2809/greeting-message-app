@@ -37,5 +37,5 @@ app.listen(PORT, () => {
 
 });
 
-//dbconnection();
 new dbconnection(process.env.MONGODB_URL,{useNewUrlParser: true}).connect();
+module.exports = app;

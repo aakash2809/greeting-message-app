@@ -46,9 +46,12 @@ function MongoDBAdapter(uri, options){
    * More info: https://github.com/joyent/node/issues/5108
    */
    MongoDBAdapter.prototype.addConnectionListener = function(event, cb){
-    var listeners = mongoose.connection._events;
+    var listeners = mongoose.connection.on;
+
     if (!listeners || !listeners[event] || listeners[event].length === 0){
+      console.log(listeners);
       mongoose.connection.once(event, cb.bind(this));
+      
     }
    };
     
@@ -76,7 +79,8 @@ function MongoDBAdapter(uri, options){
     
       if (isState('connecting')){
         debug(DEBUG_ALREADY_CONNECTING, this.uri);
-      } else {
+      } 
+      else {
         debug(DEBUG_CONNECTING, this.uri);
         mongoose.connect(this.uri, this.options);
       }
