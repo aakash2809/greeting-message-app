@@ -11,9 +11,7 @@ describe('Test API', () => {
     /**
     * Test the GET route
     */
-
    describe('GET /allGreetings',()=>{
-
     it('It should GET all greeting', (done)=>{
         chai.request(server)
         .get('/allGreetings')
@@ -37,6 +35,22 @@ describe('Test API', () => {
   /**
      * Test the POST route
     */
+   describe('POST /addGreeting',()=>{
+    it('It should POST new Greeting', (done)=>{
+        const greetingDetails = {
+            name: "Rajkumar",
+            message: "Hello"
+        };
+        chai.request(server)
+        .post('/addGreeting')
+        .send(greetingDetails)
+        .end((error,response)=>{ 
+            response.should.have.status(200);
+            response.body.should.be.a('Object');
+           done();
+        })
+    })
+})
 
     /**
     * Test the PUT route
