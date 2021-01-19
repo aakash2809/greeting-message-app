@@ -1,7 +1,7 @@
 const chai = require('chai');
 const server = require('../server');
 const chaiHttp = require('chai-http');
-const sampleGreeting = require('../testGreetings.json');
+const sampleGreeting = require('./testGreetings.json');
 chai.should();
 
 chai.use(chaiHttp);
