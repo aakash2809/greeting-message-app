@@ -1,0 +1,24 @@
+{
+    "greetings":[
+        {
+            "name":"ritik",
+            "message":"ello"
+        },
+        {
+            "name":"Priyanka",
+            "message":"Fine"
+        },
+        {
+            "name":"Vikash",
+            "message":"BeHappy"
+        },
+        {
+            "name":"Rahul",
+            "message":"GoodWork"
+        },
+        {
+            "name":"Gouri",
+            "message":"KeepGrowing"
+        }
+    ]
+}

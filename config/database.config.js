@@ -49,9 +49,7 @@ function MongoDBAdapter(uri, options){
     var listeners = mongoose.connection.on;
 
     if (!listeners || !listeners[event] || listeners[event].length === 0){
-      console.log(listeners);
-      mongoose.connection.once(event, cb.bind(this));
-      
+      mongoose.connection.once(event, cb.bind(this));  
     }
    };
     
@@ -62,18 +60,17 @@ function MongoDBAdapter(uri, options){
    MongoDBAdapter.prototype.connect = function(){
     return new blueBird(function(resolve, reject){
       if (isState('connected')){
-             debug(DEBUG_ALREADY_CONNECTED, this.uri);
+        debug(DEBUG_ALREADY_CONNECTED, this.uri);
         return resolve(this.uri);
       }
     
       this.addConnectionListener('error', function(err){
-        
         debug(DEBUG_CONNECTION_ERROR, this.uri);
         return reject(err);
       });
     
       this.addConnectionListener('open', function(){
-      debug(DEBUG_CONNECTED, this.uri);
+        debug(DEBUG_CONNECTED, this.uri);
         return resolve(this.uri);
       });
     

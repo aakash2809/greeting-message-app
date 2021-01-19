@@ -1,7 +1,7 @@
-let chai = require('chai');
-let server = require('../server');
+const chai = require('chai');
+const server = require('../server');
 const chaiHttp = require('chai-http');
-
+const sampleGreeting = require('../testGreetings.json');
 chai.should();
 
 chai.use(chaiHttp);
@@ -16,6 +16,7 @@ describe('Test API', () => {
         chai.request(server)
         .get('/allGreetings')
         .end((error,response)=>{
+            console.log(response.body);
             response.should.have.status(200);
             response.body.should.be.a('Object');
             done();
@@ -36,17 +37,13 @@ describe('Test API', () => {
     */
    describe('POST /addGreeting',()=>{
     it('It should POST new Greeting', (done)=>{
-        const greetingDetails = {
-            name: "Rajkumar",
-            message: "Hello"
-        };
-        chai.request(server)
+         chai.request(server)
         .post('/addGreeting')
-        .send(greetingDetails)
+        .send(sampleGreeting.greetings[0])
         .end((error,response)=>{ 
             response.should.have.status(200);
             response.body.should.be.a('Object');
-           done();
+        done();
         })
     })
 })
@@ -56,13 +53,12 @@ describe('Test API', () => {
      */
     describe('PUT /updateGreeting/:greetingId',()=>{
         it('It should update the task', (done)=>{
-            const greetingId = '60045735cd3728136899f043';
             const greetingDetails = {
-                name: "Priya",
+                name: "Preeti",
                 message: "Hello"
             };
             chai.request(server)
-            .put('/updateGreeting/:greetingId' + greetingId)
+            .put('/updateGreeting/6005efb8cacac71300359cc2')
             .send(greetingDetails)
             .end((error,response)=>{ 
                 response.should.have.status(200);
@@ -71,27 +67,20 @@ describe('Test API', () => {
             })
         })
     })
+
     /**
     * Test the DELETE route
    */
   describe('DELETE /greeting/:greetingId',()=>{
     it('It should delete an existing greeting', (done)=>{
-        const greetingId = '60045735cd3728136899f043';
         chai.request(server)
-        .delete('/greeting/:greetingId' + greetingId)
+        .delete('/greeting/6005e8f5e95d4213101c4610')
         .end((error,response)=>{ 
             response.should.have.status(200);
+            
            done();
         })
     })
-    it('It should delete an existing greeting', (done)=>{
-        const greetingId = '60045735cd3728136899';
-        chai.request(server)
-        .delete('/greeting/:greetingId' + greetingId)
-        .end((error,response)=>{ 
-            response.should.have.status(404);
-           done();
-        })
-    })
+
 })
 });
