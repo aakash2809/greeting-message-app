@@ -10,7 +10,7 @@
 const joi      = require('joi');
 
 module.exports = joi.object({
-    name: joi.string().required().regex(/^[A-Z]{1}[a-zA-Z]{2,}$/),
-    message: joi.string().required().regex(/^[A-Z]{1}[a-zA-Z]{2,}$/),
+    name: joi.string().required().regex(/^[A-Z]{1}[a-zA-Z ]{2,}$/),
+    message: joi.string().required().regex(/^[A-Z]{1}[a-zA-Z ]{2,}$/),
 });
 

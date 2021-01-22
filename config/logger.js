@@ -15,9 +15,9 @@ const winston   = require('winston');
       level: 'info',
       filename: './logs/info.log',
       format: winston.format.combine(
-        winston.format.timestamp({
-          format: 'YYYY-MM-DD HH:mm:ss'
-        }),
+    //   winston.format.timestamp({
+      //    format: 'YYYY-MM-DD'
+      //  }),
         winston.format.printf(
           info => `${info.timestamp} ${info.level}: ${info.message}`
         )
@@ -29,7 +29,7 @@ const winston   = require('winston');
       filename: './logs/error.log',
       format: winston.format.combine(
         winston.format.timestamp({
-          format: 'YYYY-MM-DD HH:mm:ss'
+          format: 'YYYY-MM-DD '
         }),
 
          winston.format.printf(

@@ -11,12 +11,13 @@
 
 const mongoose       = require(`mongoose`);
 const logger         = require("../../config/logger");
+
 const greetingSchema = new mongoose.Schema({
     name: {
         type: String,
         validate: {
             validator: function (name) {
-                return /^[A-Z]{1}[a-zA-Z]{2,}$/.test(name);
+                return /^[A-Z]{1}[a-zA-Z ]{2,}$/.test(name);
             },
             message: () => `should have minimum length 3!`
         },
@@ -26,10 +27,9 @@ const greetingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    time:{  type: Date, default: (new Date())},
 },
-    {
-        timestamps: true
-    },
+   
 );
 
 greetingSchema.set('versionKey', false);
