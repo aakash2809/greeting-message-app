@@ -27,9 +27,9 @@ const greetingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    time:{  type: Date, default: (new Date())},
-},
    
+},
+{ timestamps: true}  
 );
 
 greetingSchema.set('versionKey', false);
